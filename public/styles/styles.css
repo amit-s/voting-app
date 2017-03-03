@@ -1,16 +1,10 @@
+* {
+  border: 1px solid red; }
+
 #app {
   padding: 5%; }
 
 .active {
   color: red; }
-
-#polllist, #pollview {
-  border: 1px solid black; }
-
-#pollview {
-  flex-grow: 2; }
-
-#homecontainer {
-  display: flex; }
 
 /*# sourceMappingURL=styles.css.map */
