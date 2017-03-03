@@ -12,5 +12,5 @@ app.get('/', function(req,res){
 
 
 app.listen(app.get('port'), function(err){
-	console.log(`Now listening on port ${app.get('port')}`);
+	console.log(`Now listening on port ${app.get('port')}...`);
 });

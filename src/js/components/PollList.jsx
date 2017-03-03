@@ -3,8 +3,9 @@ import React, {Component} from 'react';
 export default class PollList extends Component{
 	render(){
 		return(
-			<div id="polllist">
-				<h1>Here in Poll List</h1>
+			<div>
+				<h1>Poll Item</h1>
+				{this.props.data.map((item)=><div key={item._id}>{item.name}</div>)}
 			</div>
 			);
 	}
