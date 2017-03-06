@@ -1,22 +1,22 @@
 import * as d3 from 'd3';
 
-export default function renderChart(data){
+const width = 350;
+const height = 350;	
+
+export  function renderChart(data){	
 	
+	let dataset = data.options.map(option=>Object.assign({},{name: option.name, count: option.count}));
+	let categories = data.options.map(item=>item.name);	
 
-	//let dataset = data.options.map(item=>item.count);
-	let dataset = data.options;
-	let categories = data.options.map(item=>item.name);
-	//console.log(dataset);
-
-	let w = 400;
-	let h = 400;
-	let innerRadius = 0;
+	let w = width;
+	let h = height;
+	let innerRadius = 80;
 	let outerRadius = w/2
 
-	let color = d3.scaleOrdinal(d3.schemeCategory20);
+	let color = d3.scaleOrdinal(d3.schemeCategory20);	
 	
 	let svg = d3.select("#chart")
-				.append("svg")
+				.select("svg")
 				.attr("width", w)
 				.attr("height", h);
 
@@ -27,6 +27,7 @@ export default function renderChart(data){
 	let pie = d3.pie()
 				.value(d=>d.count);
 
+	/* ***ENTER*** */
 	let arcs = svg.selectAll("g.arcs")
 					.data(pie(dataset))
 					.enter()
@@ -42,5 +43,25 @@ export default function renderChart(data){
 			.attr("transform", d=>`translate(${arc.centroid(d)})`)
 			.attr("text-anchor","middle")
 			.text(d=>d.data.name);
-			
+
+	/* ***UPDATE*** */
+		svg.selectAll("path")
+			.data(pie(dataset))			
+			.attr("d", arc)
+			.attr("fill", (d,i)=>color(i));
+
+		svg.selectAll("text")
+			.data(pie(dataset))
+			.transition()
+			.attr("transform", d=>`translate(${arc.centroid(d)})`)
+			.attr("text-anchor","middle")
+			.text(d=>d.data.name);
+
+	/* ***REMOVE*** */
+		svg.selectAll("g.arcs")
+			.data(pie(dataset))
+			.exit()
+			.remove();
+
 }
+

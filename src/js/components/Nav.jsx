@@ -16,12 +16,12 @@ export default class Nav extends Component{
 							<span className="icon-bar">Sign In</span>
 							<span className="icon-bar">Register</span>
 							</button>
-							<a className="navbar-brand" href="#">Voting App</a>
+							<a className="navbar-brand" href="/">Voting App</a>
 						</div>						
 						<div className="collapse navbar-collapse" id="navbar-collapse-menu">
 							<ul className="nav navbar-nav">
 								<li><NavLink to="/" >Home</NavLink></li>
-								<li><NavLink to="/about">Register</NavLink></li>
+								<li><NavLink to="/addpoll">Add</NavLink></li>
 							</ul>
 							<ul className="nav navbar-nav navbar-right">
 								<li><button type="button" className="btn btn-default navbar-btn">Sign in</button></li>
