@@ -23,8 +23,7 @@ export default class PollView extends Component{
 		});
 
 		if(!empty){
-			renderChart(this.props.data);
-			//updateChart(this.props.data);		
+			renderChart(this.props.data);			
 		}else{
 			d3.select("svg")
 				.selectAll("*").remove();
@@ -40,13 +39,20 @@ export default class PollView extends Component{
 
 	render(){
 		let style = {
-			flexGrow: 3
+			container: {
+				flexGrow: 3,
+				display: "flex",
+				flexDirection: "column"
+			},
+			chart: {
+				margin: "auto"
+			}
 		};
 
 		return(
-			<div style={style}>
+			<div style={style.container}>
 				<h1 className="text-center">{this.props.data.name}</h1>
-				<div id="chart">
+				<div id="chart" style={style.chart}>
 					<svg></svg>
 					<PollVote getvote={this.props.getvote} data={this.props.data}/>
 				</div>

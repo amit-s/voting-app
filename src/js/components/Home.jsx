@@ -13,22 +13,20 @@ export default class Home extends Component{
 			data: []
 		};
 		this.updateSelectedPoll = this.updateSelectedPoll.bind(this);
-		this.updateData = this.updateData.bind(this);
-		//this.renderHome = this.renderHome.bind(this);
-		//this.renderBlankHome = this.renderBlankHome.bind(this);
+		this.updateData = this.updateData.bind(this);		
 		
 	}
 
 	updateData(newdata){
-		//console.log(newdata);
-		let temp = this.state.data.map(function(item){
+		
+		let data = this.state.data.map(function(item){
 			if(item._id == newdata._id){
 				return newdata;
 			}else{
 				return item;
 			}
 		});
-		this.setState({data: temp});
+		this.setState({data});
 	}
 
 	updateSelectedPoll(newPoll){		

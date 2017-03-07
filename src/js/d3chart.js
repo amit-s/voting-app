@@ -6,6 +6,7 @@ const height = 350;
 export default function renderChart(data){	
 	
 	let dataset = data.options.map(option=>Object.assign({},{name: option.name, count: option.count}));
+	
 	//let categories = data.options.map(item=>item.name);	
 
 	let w = width;
@@ -30,6 +31,7 @@ export default function renderChart(data){
 	let pie = d3.pie()
 				.value(d=>d.count);
 
+
 	/* ***ENTER*** */
 	let arcs = svg.selectAll("g.arcs")
 					.data(pie(dataset))
@@ -45,7 +47,12 @@ export default function renderChart(data){
 		arcs.append("text")
 			.attr("transform", d=>`translate(${arc.centroid(d)})`)
 			.attr("text-anchor","middle")
-			.text(d=>d.data.name);
+			.text(d=>{
+				if(d.data.count != 0){
+					
+					return d.data.name;
+				}				
+			});
 
 	/* ***UPDATE*** */
 		svg.selectAll("path")
@@ -57,8 +64,13 @@ export default function renderChart(data){
 			.data(pie(dataset))
 			.transition()
 			.attr("transform", d=>`translate(${arc.centroid(d)})`)
-			.attr("text-anchor","middle")
-			.text(d=>d.data.name);
+			.attr("text-anchor","middle")			
+			.text(d=>{
+				if(d.data.count != 0){
+					
+					return d.data.name;
+				}				
+			});
 
 	/* ***REMOVE*** */
 		svg.selectAll("g.arcs")

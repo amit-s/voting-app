@@ -13,8 +13,7 @@ render(
 		<Route path="/" component={Nav} >
 			<IndexRoute component={Home} />
 			<Route path="/about" component={About} />
-			<Route path ="/addpoll" component={AddPoll} />
-			<Route path="/confirmpoll" component={ConfirmPoll} />
+			<Route path ="/addpoll" component={AddPoll} />			
 		</Route>
 	</Router>
 	, document.getElementById("app"));

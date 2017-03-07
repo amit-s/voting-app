@@ -7,8 +7,7 @@ export default class PollList extends Component{
 		this.getId = this.getId.bind(this);
 	}
 
-	getId(e){
-		//console.log(e.target.id);
+	getId(e){		
 		this.props.updatePoll(e.target.id);
 	}
 
@@ -19,7 +18,7 @@ export default class PollList extends Component{
 
 		return(
 			<div style={style}>
-				<h1>Poll Items</h1>
+				<h1>Poll List:</h1>
 				{this.props.data.map((item,i)=><div key={item._id} id={i} onClick={this.getId}>{item.name}</div>)}
 			</div>
 			);

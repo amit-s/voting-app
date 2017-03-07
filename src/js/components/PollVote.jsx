@@ -23,9 +23,14 @@ export default class PollVote extends Component{
 		this.props.getvote(newdata);
 	}
 
-	render(){		
+	render(){
+		let style = {
+			margin: "auto",
+			width: "50%"
+		};
+
 		return(
-			<div>
+			<div style={style}>
 				Vote for : 
 				<select name={this.props.data.name} onChange={this.handleChange} value={this.state.value}>
 				<option value="select">Select...</option>
