@@ -31,7 +31,7 @@ export default class PollView extends Component{
 				.append("g")
 				.attr("id","emptynotify")
 				.append("text")				
-				.text("Database empty...")
+				.text("No Votes yet...")
 				.attr("x", 100)
 				.attr("y", 100)			
 		}

@@ -46,12 +46,12 @@ export default class Home extends Component{
 		});
 	}
 
-	componentWillMount(){		
+	componentDidMount(){		
 		let xhr = new XMLHttpRequest()
 		xhr.open('GET', '/api/data', true);
 		xhr.send(null);
 
-		xhr.onload = ()=>{
+		xhr.onload = ()=>{			
 			this.setState({data: JSON.parse(xhr.responseText).data});			
 		}
 	}
@@ -67,7 +67,7 @@ export default class Home extends Component{
 	render(){
 		let style = {display: "flex"};
 		
-		if(this.state.data.length > 1){
+		if(this.state.data.length >= 1){
 			return this.renderHome();
 		}else{
 			return null;
