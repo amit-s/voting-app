@@ -3,7 +3,7 @@ import * as d3 from 'd3';
 const width = 350;
 const height = 350;	
 
-export  function renderChart(data){	
+export default function renderChart(data){	
 	
 	let dataset = data.options.map(option=>Object.assign({},{name: option.name, count: option.count}));
 	//let categories = data.options.map(item=>item.name);	
@@ -19,6 +19,9 @@ export  function renderChart(data){
 				.select("svg")
 				.attr("width", w)
 				.attr("height", h);
+
+	svg.select("#emptynotify")
+		.remove();
 
 	let arc = d3.arc()
 				.innerRadius(innerRadius)

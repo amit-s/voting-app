@@ -9,7 +9,7 @@ export default class PollList extends Component{
 
 	getId(e){
 		//console.log(e.target.id);
-		this.props.updatePoll(e.target.id-1);
+		this.props.updatePoll(e.target.id);
 	}
 
 	render(){
@@ -20,7 +20,7 @@ export default class PollList extends Component{
 		return(
 			<div style={style}>
 				<h1>Poll Items</h1>
-				{this.props.data.map((item)=><div key={item._id} id={item._id} onClick={this.getId}>{item.name}</div>)}
+				{this.props.data.map((item,i)=><div key={item._id} id={i} onClick={this.getId}>{item.name}</div>)}
 			</div>
 			);
 	}
