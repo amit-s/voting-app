@@ -1,5 +1,6 @@
 let bodyParser = require('body-parser');
 let mongo = require('mongodb').MongoClient;
+let ObjectID = require('mongodb').ObjectID;
 let express = require('express');
 let app = express();
 
@@ -42,10 +43,22 @@ mongo.connect(mongoURL, function(err,db){
 
 	app.route('/api/data')
 		.get(function(req,res){
-			db.collection('general').find({}).toArray(function(err,data){
-				//console.log(data);
+			db.collection('general').find({}).toArray(function(err,data){				
 				res.json({data});
 			});
+		})
+		.post(function(req,res){			
+			let newdata = JSON.parse(req.body.data);
+			
+			db.collection('general').updateOne(
+				{
+					_id: ObjectID.createFromHexString(newdata._id)
+				},
+				{
+					$set: {
+						options: [...newdata.options]
+					}
+				})
 		});
 
 	app.listen(app.get('port'), function(err){

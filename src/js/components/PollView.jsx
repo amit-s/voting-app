@@ -42,17 +42,15 @@ export default class PollView extends Component{
 			container: {
 				flexGrow: 3,
 				display: "flex",
-				flexDirection: "column"
-			},
-			chart: {
-				margin: "auto"
+				flexDirection: "column",
+				alignItems: "center"
 			}
 		};
 
 		return(
 			<div style={style.container}>
-				<h1 className="text-center">{this.props.data.name}</h1>
-				<div id="chart" style={style.chart}>
+				<h1>{this.props.data.name}</h1>
+				<div id="chart">
 					<svg></svg>
 					<PollVote getvote={this.props.getvote} data={this.props.data}/>
 				</div>

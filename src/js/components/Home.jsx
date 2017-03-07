@@ -14,7 +14,6 @@ export default class Home extends Component{
 		};
 		this.updateSelectedPoll = this.updateSelectedPoll.bind(this);
 		this.updateData = this.updateData.bind(this);		
-		
 	}
 
 	updateData(newdata){
@@ -26,6 +25,18 @@ export default class Home extends Component{
 				return item;
 			}
 		});
+
+		let params = `data=${JSON.stringify(newdata)}`;
+
+		let xhr = new XMLHttpRequest();
+		xhr.open('POST', '/api/data', true);
+		xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+		xhr.onload = function(){
+			if(xhr.status == 200){
+				console.log('data sent to server');
+			}
+		};
+		xhr.send(params);
 		this.setState({data});
 	}
 
@@ -35,18 +46,13 @@ export default class Home extends Component{
 		});
 	}
 
-	componentWillMount(){
-		//console.log('here will mount');
+	componentWillMount(){		
 		let xhr = new XMLHttpRequest()
 		xhr.open('GET', '/api/data', true);
 		xhr.send(null);
 
 		xhr.onload = ()=>{
-			
-			//console.log(JSON.parse(xhr.responseText).data);
-			this.setState({data: JSON.parse(xhr.responseText).data});
-			//this.data = JSON.parse(xhr.responseText).data;
-			
+			this.setState({data: JSON.parse(xhr.responseText).data});			
 		}
 	}
 
@@ -60,7 +66,7 @@ export default class Home extends Component{
 
 	render(){
 		let style = {display: "flex"};
-		//console.log(this.state.data);
+		
 		if(this.state.data.length > 1){
 			return this.renderHome();
 		}else{
