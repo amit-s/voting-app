@@ -3,6 +3,8 @@ let apiRouter = require('./api.js');
 
 module.exports = function(app){
 
+
+
 	let db;
 	app.use('/api', apiRouter);
 	app.use(function(req,res,next){
@@ -12,7 +14,7 @@ module.exports = function(app){
 	});
 
 	app.route('/')
-		.get(function(req,res){	
+		.get(function(req,res){
 			res.sendFile(process.cwd() + '/public/index.html');
 		})
 		.post(function(req,res){

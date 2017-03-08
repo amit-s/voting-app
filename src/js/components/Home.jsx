@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PollList from './PollList.jsx';
 import PollView from './PollView.jsx';
-import {updateDB} from '../../../app/controller/api_functions.js';
+import {updateDB, queryDB} from '../../../app/controller/api_functions.js';
 
 export default class Home extends Component{
 
@@ -35,14 +35,11 @@ export default class Home extends Component{
 		});
 	}
 
-	componentDidMount(){		
-		let xhr = new XMLHttpRequest()
-		xhr.open('GET', '/api/data', true);
-		xhr.send(null);
-
-		xhr.onload = ()=>{			
-			this.setState({data: JSON.parse(xhr.responseText).data});			
-		}		
+	componentDidMount(){				
+		queryDB().then(dbData=>this.setState({data: JSON.parse(dbData).data})
+		, function(err){
+			console.log(err);
+		})
 	}
 
 	renderHome(){

@@ -9,13 +9,17 @@ Router.use(function(req,res,next){
 });
 
 Router.route('/data')
-	.get(function(req,res){		
+	.get(function(req,res){
+		
 		db.collection('general').find({}).toArray(function(err,data){
 			if(err)
 				throw new Error(err);
 			if(data.length<1){
 				console.log('database is empty');
 			}else{
+				/*res.set({
+					"Access-Control-Allow-Origin": "*"
+				});*/
 				res.json({data});
 			}
 		});
