@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
 import PollList from './PollList.jsx';
 import PollView from './PollView.jsx';
-
-
+import {updateDB} from '../../../app/controller/api_functions.js';
 
 export default class Home extends Component{
 
@@ -13,11 +12,10 @@ export default class Home extends Component{
 			data: []
 		};
 		this.updateSelectedPoll = this.updateSelectedPoll.bind(this);
-		this.updateData = this.updateData.bind(this);		
+		this.updateDataCount = this.updateDataCount.bind(this);		
 	}
 
-	updateData(newdata){
-		
+	updateDataCount(newdata){		
 		let data = this.state.data.map(function(item){
 			if(item._id == newdata._id){
 				return newdata;
@@ -27,16 +25,7 @@ export default class Home extends Component{
 		});
 
 		let params = `data=${JSON.stringify(newdata)}`;
-
-		let xhr = new XMLHttpRequest();
-		xhr.open('POST', '/api/data', true);
-		xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-		xhr.onload = function(){
-			if(xhr.status == 200){
-				console.log('data sent to server');
-			}
-		};
-		xhr.send(params);
+		updateDB(params);
 		this.setState({data});
 	}
 
@@ -53,14 +42,14 @@ export default class Home extends Component{
 
 		xhr.onload = ()=>{			
 			this.setState({data: JSON.parse(xhr.responseText).data});			
-		}
+		}		
 	}
 
 	renderHome(){
 		let style = {display: "flex"};
 		return (<div style={style}>
 					<PollList data={this.state.data} updatePoll={this.updateSelectedPoll}/>
-					<PollView data={this.state.data[this.state.selectedPoll]} getvote={this.updateData}/>
+					<PollView data={this.state.data[this.state.selectedPoll]} getvote={this.updateDataCount}/>
 				</div>);
 	}
 
@@ -71,8 +60,6 @@ export default class Home extends Component{
 			return this.renderHome();
 		}else{
 			return null;
-		}
-		
+		}		
 	}
-
 }
