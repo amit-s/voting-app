@@ -15,7 +15,8 @@ module.exports = function(app){
 
 	app.route('/')
 		.get(function(req,res){
-			res.sendFile(process.cwd() + '/public/index.html');
+			//res.sendFile(process.cwd() + '/public/index.html');
+			res.render('index',{testdata: 'i see you!!!'});
 		})
 		.post(function(req,res){
 			let newItem = {};

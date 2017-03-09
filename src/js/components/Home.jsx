@@ -36,10 +36,8 @@ export default class Home extends Component{
 	}
 
 	componentDidMount(){				
-		queryDB().then(dbData=>this.setState({data: JSON.parse(dbData).data})
-		, function(err){
-			console.log(err);
-		})
+		queryDB().then(dbData=>this.setState({data: JSON.parse(dbData).data}),
+						err=>console.log(err))
 	}
 
 	renderHome(){
@@ -51,6 +49,7 @@ export default class Home extends Component{
 	}
 
 	render(){
+		
 		let style = {display: "flex"};
 		
 		if(this.state.data.length >= 1){

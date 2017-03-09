@@ -1,6 +1,5 @@
 let bodyParser = require('body-parser');
 let mongo = require('mongodb').MongoClient;
-let ObjectID = require('mongodb').ObjectID;
 let express = require('express');
 let app = express();
 let route = require('./app/routes/index.js');
@@ -17,9 +16,10 @@ mongo.connect(mongoURL, function(err,db){
 
 	app.set('port', port);
 	app.set('mongo', db);
+	app.set('view engine', 'pug');
 	app.use('/public', express.static(__dirname + '/public'));
 	app.use(bodyParser.urlencoded({extended: false}));
-
+	
 	route(app);
 
 	app.listen(app.get('port'), function(err){

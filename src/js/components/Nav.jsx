@@ -4,6 +4,7 @@ import NavLink from './NavLink.jsx';
 
 export default class Nav extends Component{
 	render(){
+		
 		return(
 			<div>
 				<nav className="navbar navbar-default">
