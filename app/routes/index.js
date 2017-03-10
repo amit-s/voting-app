@@ -1,3 +1,9 @@
+import React from 'react';
+import {match, RouterContext} from 'react-router';
+import {renderToString} from 'react-dom/server';
+import routes from '../../src/js/components/Routes.jsx';
+
+
 let apiRouter = require('./api.js');
 
 
@@ -16,7 +22,7 @@ module.exports = function(app){
 	app.use('/api', apiRouter);
 
 	app.route('/')
-		.get(function(req,res){			
+		.get(function(req,res){
 			res.render('index');
 		})
 		.post(function(req,res){
@@ -39,8 +45,16 @@ module.exports = function(app){
 
 	app.route('/register')
 		.get(function(req,res){
-			console.log(req.app.dataAddUser);
-			res.render('index',{testdata: "XXXXX"});
+			
+			let location = req.url;
+			match({routes,location},(error,redirect,renderProps)=>{
+
+				if(renderProps){
+					let reactHtml = renderToString(<RouterContext {...renderProps} createElement={(Component,props)=><Component {...props} userdata={req.app.dataAddUser}/>} />);
+					res.render('adduser',{reactHtml});
+				}
+			});
+			
 
 		})
 		.post(function(req,res){
@@ -64,6 +78,7 @@ module.exports = function(app){
 
 				}else{
 					console.log('no errors');
+
 				}
 
 			});

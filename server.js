@@ -19,6 +19,7 @@ mongo.connect(mongoURL, function(err,db){
 
 	console.log(`Successfully connected to database...`);
 
+	app.enable('trust proxy');
 	app.set('port', port);
 	app.set('mongo', db);
 	app.set('view engine', 'pug');
