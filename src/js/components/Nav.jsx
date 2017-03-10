@@ -25,6 +25,7 @@ export default class Nav extends Component{
 								<li><NavLink to="/addpoll">Add</NavLink></li>
 							</ul>
 							<ul className="nav navbar-nav navbar-right">
+								<li><NavLink to="/register" >Register</NavLink></li>
 								<li><button type="button" className="btn btn-default navbar-btn">Sign in</button></li>
 							</ul>
 						</div>

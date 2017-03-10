@@ -30,21 +30,26 @@ export default class AddPoll extends Component{
 	render(){
 		let options = [];
 		for(var i=0; i<this.state.optionCount; i++){
-			options.push(<input type="input" name={`option${i}`} key={i} />);
+			options.push(<input className="form-control" type="input" name={`option${i}`} key={i} />);
 		}
 
 		return(
 			<div>
 				<h1> Add a Poll here</h1>
 				<form action="/" method="post">
-				Poll Name: 
-				<input type="text" name="pollName" /><br/>
-				Options:
-				{options}
-				<br/>
-				<input type="button" name="add" value="+" onClick={this.updateOptionCount} />
-				<input type="button" name="remove" value="-" onClick={this.updateOptionCount} /><br/>
-				<input type="submit" value="Add Poll" />
+					<div className="form-group">
+						<label>Poll Name: </label>
+						<input className="form-control" type="text" name="pollName" />
+					</div>
+					<div className="form-group">
+						<label>Options:</label>
+						{options}
+					</div>
+					<div className="form-group">
+						<input type="button" className="btn" name="add" value="+" onClick={this.updateOptionCount} />
+						<input type="button" className="btn" name="remove" value="-" onClick={this.updateOptionCount} />
+					</div>
+					<input type="submit" className="btn" value="Add Poll" />
 				</form>
 			</div>
 			);

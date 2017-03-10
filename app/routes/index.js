@@ -6,17 +6,18 @@ module.exports = function(app){
 
 
 	let db;
-	app.use('/api', apiRouter);
+	
 	app.use(function(req,res,next){
 		req.time = Date.now();
 		db = req.app.get('mongo');
 		next();
 	});
 
+	app.use('/api', apiRouter);
+
 	app.route('/')
-		.get(function(req,res){
-			//res.sendFile(process.cwd() + '/public/index.html');
-			res.render('index',{testdata: 'i see you!!!'});
+		.get(function(req,res){			
+			res.render('index');
 		})
 		.post(function(req,res){
 			let newItem = {};
