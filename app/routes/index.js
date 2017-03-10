@@ -36,4 +36,38 @@ module.exports = function(app){
 				res.redirect('/');
 			});
 		});
+
+	app.route('/register')
+		.get(function(req,res){
+			console.log(req.app.dataAddUser);
+			res.render('index',{testdata: "XXXXX"});
+
+		})
+		.post(function(req,res){
+			let { name,username,password,password2 } = req.body;
+
+			req.checkBody('name', 'Name is required').notEmpty();
+			req.checkBody('username', 'Username is required').notEmpty();
+			req.checkBody('password', 'Password is required').notEmpty();
+			req.checkBody('password2', 'Passwords should match').equals(req.body.password);
+
+			req.getValidationResult().then(function(result){
+
+				if(!result.isEmpty()){
+					//console.log('errors');
+					
+					let data = {};
+					data.userinfo = req.body;
+					data.errors = result.array();
+					req.app.dataAddUser = data;
+					res.redirect('/register');
+
+				}else{
+					console.log('no errors');
+				}
+
+			});
+			
+
+		});
 }

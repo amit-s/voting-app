@@ -2,9 +2,10 @@ import React, {Component} from 'react';
 
 export default class AddUser extends Component{
 	render(){
+		console.log(this.props.testdata);
 		return(
 			<div>
-				<form method="POST" action="">
+				<form method="POST" action="/register">
 					<div className="form-group">
 						<label>Name: </label>
 						<input type="text" className="form-control" name="name" />
@@ -15,11 +16,11 @@ export default class AddUser extends Component{
 					</div>
 					<div className="form-group">
 						<label>Password: </label>
-						<input type="text" className="form-control" name="password" />
+						<input type="password" className="form-control" name="password" />
 					</div>
 					<div className="form-group">
 						<label>Retype Password: </label>
-						<input type="text" className="form-control" name="password2" />
+						<input type="password" className="form-control" name="password2" />
 					</div>
 					<input type="submit" className="btn" value="Create" />
 				</form>
