@@ -4,6 +4,7 @@ import Home from './Home.jsx';
 import About from './About.jsx';
 import AddPoll from './AddPoll.jsx';
 import AddUser from './AddUser.jsx'
+import Login from './Login.jsx';
 import Nav from './Nav.jsx';
 
 module.exports = (
@@ -12,5 +13,6 @@ module.exports = (
 		<Route path="/about" component={About} />
 		<Route path ="/addpoll" component={AddPoll} />
 		<Route path="/register" component={AddUser} />
+		<Route path="/login" component={Login} />
 	</Route>
 );

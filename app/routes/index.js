@@ -51,7 +51,7 @@ module.exports = function(app){
 
 				if(renderProps){
 					let reactHtml = renderToString(<RouterContext {...renderProps} createElement={(Component,props)=><Component {...props} userdata={req.app.dataAddUser}/>} />);
-					res.render('adduser',{reactHtml});
+					res.render('renderReact',{reactHtml});
 				}
 			});
 			
@@ -67,9 +67,7 @@ module.exports = function(app){
 
 			req.getValidationResult().then(function(result){
 
-				if(!result.isEmpty()){
-					//console.log('errors');
-					
+				if(!result.isEmpty()){					
 					let data = {};
 					data.userinfo = req.body;
 					data.errors = result.array();
@@ -78,11 +76,22 @@ module.exports = function(app){
 
 				}else{
 					console.log('no errors');
+					req.flash('success_msg', 'Account successfully created. Go ahead and login below');
+					res.redirect('/login');
+				}
+			});			
+		});
+
+	app.route('/login')
+		.get(function(req,res,next){			
+			match({routes,location: req.url},(error,redirect,renderProps)=>{
+				if(renderProps){
+					let reactHtml = renderToString(<RouterContext {...renderProps} createElement={(Component,props)=><Component {...props} msg={res.locals}/>}/>);
+					res.render('renderReact',{reactHtml});
 
 				}
-
 			});
 			
-
 		});
+
 }

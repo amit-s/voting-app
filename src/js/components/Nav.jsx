@@ -26,7 +26,7 @@ export default class Nav extends Component{
 							</ul>
 							<ul className="nav navbar-nav navbar-right">
 								<li><NavLink to="/register" >Register</NavLink></li>
-								<li><button type="button" className="btn btn-default navbar-btn">Sign in</button></li>
+								<li><NavLink to="/login" >Sign In</NavLink></li>
 							</ul>
 						</div>
 					</div>
