@@ -2,6 +2,7 @@ import React from 'react';
 import {match, RouterContext} from 'react-router';
 import {renderToString} from 'react-dom/server';
 import routes from '../../src/js/components/Routes.jsx';
+import {addUser} from '../controller/api_functions_server.js';
 
 
 let apiRouter = require('./api.js');
@@ -50,7 +51,7 @@ module.exports = function(app){
 			match({routes,location},(error,redirect,renderProps)=>{
 
 				if(renderProps){
-					let reactHtml = renderToString(<RouterContext {...renderProps} createElement={(Component,props)=><Component {...props} userdata={req.app.dataAddUser}/>} />);
+					let reactHtml = renderToString(<RouterContext {...renderProps} createElement={(Component,props)=><Component {...props} userdata={req.app.dataAddUser} msg={res.locals}/>} />);
 					res.render('renderReact',{reactHtml});
 				}
 			});
@@ -67,17 +68,33 @@ module.exports = function(app){
 
 			req.getValidationResult().then(function(result){
 
-				if(!result.isEmpty()){					
-					let data = {};
+				let data = {};
 					data.userinfo = req.body;
 					data.errors = result.array();
 					req.app.dataAddUser = data;
+
+				if(!result.isEmpty()){					
+					//let data = {};
+					//data.userinfo = req.body;
+					//data.errors = result.array();
+					//req.app.dataAddUser = data;
 					res.redirect('/register');
 
 				}else{
-					console.log('no errors');
-					req.flash('success_msg', 'Account successfully created. Go ahead and login below');
-					res.redirect('/login');
+					//console.log('no errors');
+					let newUser = req.body;
+					newUser.createdTime = req.time;
+					delete newUser['password2'];
+					addUser(newUser,db).then((success)=>{
+						console.log(success);
+						req.flash('success_msg', 'Account successfully created. Go ahead and login below');					
+						res.redirect('/login');
+					}, (error)=>{
+						console.error('username exists');
+						req.flash('error_msg','Username already exists...');
+						res.redirect('/register');
+					});
+					
 				}
 			});			
 		});

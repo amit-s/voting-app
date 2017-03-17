@@ -7,6 +7,8 @@ export default class AddUser extends Component{
 		name: "",
 		username: ""
 	};
+	let dbErrorMessage = "";
+
 
 	if(this.props.userdata){
 		let errors = this.props.userdata.errors;
@@ -14,12 +16,18 @@ export default class AddUser extends Component{
 		
 		defaultValue.name = name;
 		defaultValue.username = username;
-		errorMessage = errors.map((error,i)=><div className="alert alert-danger" key={i} defaultValue={error.value}>{error.msg}</div>);
-	}	
+		if(errors.length >= 1){
+			errorMessage = errors.map((error,i)=><div className="alert alert-danger" key={i} defaultValue={error.value}>{error.msg}</div>);
+		}else{
+			errorMessage = <div className="alert alert-danger">{this.props.msg.error_msg}</div>
+		}
+
+	}
 
 		return(
 			<div>
 				{errorMessage}
+				
 				<form method="POST" action="/register">
 					<div className="form-group">
 						<label>Name: </label>

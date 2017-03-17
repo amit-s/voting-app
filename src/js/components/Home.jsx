@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PollList from './PollList.jsx';
 import PollView from './PollView.jsx';
-import {updateDB, queryDB} from '../../../app/controller/api_functions.js';
+import {updateDB, queryDB} from '../../../app/controller/api_functions_client.js';
 
 export default class Home extends Component{
 
