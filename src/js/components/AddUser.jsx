@@ -7,10 +7,11 @@ export default class AddUser extends Component{
 		name: "",
 		username: ""
 	};
-	let dbErrorMessage = "";
+	//let dbErrorMessage = "";
 
 
 	if(this.props.userdata){
+
 		let errors = this.props.userdata.errors;
 		let {name,username} = this.props.userdata.userinfo;
 		
@@ -18,9 +19,12 @@ export default class AddUser extends Component{
 		defaultValue.username = username;
 		if(errors.length >= 1){
 			errorMessage = errors.map((error,i)=><div className="alert alert-danger" key={i} defaultValue={error.value}>{error.msg}</div>);
-		}else{
+		}
+		if(this.props.msg){			
+			if(this.props.msg.error_msg.length >= 1)
 			errorMessage = <div className="alert alert-danger">{this.props.msg.error_msg}</div>
 		}
+		
 
 	}
 

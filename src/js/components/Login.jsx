@@ -3,12 +3,12 @@ import React, {Component} from 'react';
 export default class Login extends Component{
 
 	render(){
-	let msgBox;
-	
+	let msgBox="";	
 	if(this.props.msg){
-		let success_msg = this.props.msg.success_msg[0];
-
-		msgBox = <div className="alert alert-success">{success_msg}</div>;
+		if(this.props.msg.success_msg.length >= 1){
+			let success_msg = this.props.msg.success_msg[0];
+			msgBox = <div className="alert alert-success">{success_msg}</div>;
+		}
 	}
 	
 	
