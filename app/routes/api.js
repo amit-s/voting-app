@@ -1,8 +1,9 @@
 import {getPolls, updateVoteCount} from '../controller/api_functions_server.js';
+import express from 'express';
 
-let express = require('express');
+
 let Router = express.Router();
-let ObjectID = require('mongodb').ObjectID;
+
 let db;
 
 Router.use(function(req,res,next){

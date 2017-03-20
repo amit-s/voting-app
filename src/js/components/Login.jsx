@@ -15,7 +15,7 @@ export default class Login extends Component{
 		return(
 			<div>
 				{msgBox}
-				<form method="" action="">
+				<form method="POST" action="/login">
 					<div className="form-group">
 						<label>Username</label>
 						<input type="text" className="form-control" name="name" />
