@@ -20,6 +20,29 @@ export function addUser(newUser,db){
 	});	
 }
 
+export function getUserByUsername(username, db, callback){
+	let query = {username};
+	db.collection('users').findOne(query, callback);
+}
+
+export function getUserById(id, db, callback){
+	
+	let searchid = ObjectID.createFromHexString(id)	
+
+	let query = {_id: searchid};
+	
+	db.collection('users').findOne(query, callback);
+}
+
+export function comparePassword(inputPassword,hash,callback){
+
+	bcrypt.compare(inputPassword, hash, function(err, isMatch) {
+    	if (err) throw 	err;
+    	callback(null, isMatch)
+	});
+
+};
+
 export function addPoll(req,db){
 	return new Promise((resolve,reject)=>{
 		let query = req.body;

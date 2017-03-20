@@ -3,11 +3,16 @@ import React, {Component} from 'react';
 export default class Login extends Component{
 
 	render(){
-	let msgBox="";	
+	let msgBox = "";	
 	if(this.props.msg){
 		if(this.props.msg.success_msg.length >= 1){
 			let success_msg = this.props.msg.success_msg[0];
 			msgBox = <div className="alert alert-success">{success_msg}</div>;
+		}
+
+		if(this.props.msg.error.length >= 1){
+			let error = this.props.msg.error[0];
+			msgBox = <div className="alert alert-danger">{error}</div>;
 		}
 	}
 	
@@ -18,7 +23,7 @@ export default class Login extends Component{
 				<form method="POST" action="/login">
 					<div className="form-group">
 						<label>Username</label>
-						<input type="text" className="form-control" name="name" />
+						<input type="text" className="form-control" name="username" />
 					</div>
 					<div className="form-group">
 						<label>Password</label>

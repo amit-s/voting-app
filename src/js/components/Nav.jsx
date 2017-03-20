@@ -12,17 +12,15 @@ export default class Nav extends Component{
 					
 						<div className="navbar-header">
 							<button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="navbar-collapse-menu" aria-expanded="false">
-							<span className="sr-only">Toggle navigation</span>
-							<span className="icon-bar">Home</span>
+							<span className="sr-only">Toggle navigation</span>							
 							<span className="icon-bar">Sign In</span>
 							<span className="icon-bar">Register</span>
 							</button>
 							<a className="navbar-brand" href="/">Voting App</a>
 						</div>						
 						<div className="collapse navbar-collapse" id="navbar-collapse-menu">
-							<ul className="nav navbar-nav">
-								<li><NavLink to="/" >Home</NavLink></li>
-								<li><NavLink to="/addpoll">Add</NavLink></li>
+							<ul className="nav navbar-nav">								
+								<li><NavLink to="/addpoll">Add Poll</NavLink></li>
 							</ul>
 							<ul className="nav navbar-nav navbar-right">
 								<li><NavLink to="/register" >Register</NavLink></li>

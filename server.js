@@ -10,6 +10,8 @@ let mongo = require('mongodb').MongoClient;
 let express = require('express');
 let route = require('./app/routes/index.js');
 let expressValidator = require('express-validator');
+let passport = require('passport');
+let LocalStrategy = require('passport-local').Strategy;
 
 let port = process.env.PORT || 3000;
 let mongoURL = process.env.MONGO_URI || 'mongodb://localhost:27017/polls'
@@ -28,8 +30,14 @@ mongo.connect(mongoURL, function(err,db){
 	app.set('view engine', 'pug');
 
 	app.use('/public', express.static(__dirname + '/public'));
-	app.use(bodyParser.urlencoded({extended: false}));
 	app.use(cookieParser());
+	app.use(bodyParser.urlencoded({extended: false}));
+	app.use(session({
+		secret: 'secret',
+		saveUninitialized: false,
+		resave: true
+	}));
+	app.use(flash());
 	app.use(expressValidator({
 		errorFormatter: function(param, msg, value) {
 			let namespace = param.split('.'),
@@ -46,14 +54,7 @@ mongo.connect(mongoURL, function(err,db){
 			};
 		}
 	}));
-
-	app.use(session({
-		secret: 'secret',
-		saveUninitialized: true,
-		resave: false
-	}));
-
-	app.use(flash());
+	
 
 	app.use(function(req,res,next){
 		res.locals.success_msg = req.flash('success_msg');
@@ -61,6 +62,19 @@ mongo.connect(mongoURL, function(err,db){
 		res.locals.error = req.flash('error');
 		next();
 	});
+
+	app.use(passport.initialize());
+	app.use(passport.session());
+
+	/*passport.serializeUser(function(user, done){
+		done(null, user.id);
+	});
+
+	passport.deserializeUser(function(id, done){
+		User.findById(id, function(err, user){
+			done(err, user);
+		});
+	});*/
 	
 	route(app);
 

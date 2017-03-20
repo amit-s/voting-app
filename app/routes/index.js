@@ -11,7 +11,7 @@ module.exports = function(app){
 
 	let db;
 	
-	app.use(function(req,res,next){
+	app.use(function(req,res,next){		
 		req.time = Date.now();
 		db = req.app.get('mongo');
 		next();
@@ -23,12 +23,18 @@ module.exports = function(app){
 
 	app.route('/')
 		.get(function(req,res){
+
 			res.render('index');
 		})
 		.post(function(req,res){			
-			addPoll(req,db).then(function(msg){
-				console.log(msg);
+			addPoll(req,db).then(function(msg){				
 				res.redirect('/');
 			})
+		});
+
+	app.route('/user')
+		.get(function(req,res){
+			console.log(req.user);			
+			res.send("userpage after log in");
 		});
 }
