@@ -2,15 +2,13 @@ import React from 'react';
 import {match, RouterContext} from 'react-router';
 import {renderToString} from 'react-dom/server';
 import routes from '../../src/js/components/Routes.jsx';
-import {addUser} from '../controller/api_functions_server.js';
+import {addUser, addPoll} from '../controller/api_functions_server.js';
+
 
 
 let apiRouter = require('./api.js');
 
-
 module.exports = function(app){
-
-
 
 	let db;
 	
@@ -26,37 +24,22 @@ module.exports = function(app){
 		.get(function(req,res){
 			res.render('index');
 		})
-		.post(function(req,res){
-			let newItem = {};
-			newItem.options = [];
-			let query = req.body;
-			for(var key in query){
-				if(key == "pollName"){
-					newItem.name = query[key];
-					newItem.timestamp = req.time;
-				}else{
-					newItem.options.push({name: query[key], count: 0});
-				}
-			}
-			db.collection('general').insert(newItem, function(){
-				console.log('db item inserted...');
+		.post(function(req,res){			
+			addPoll(req,db).then(function(msg){
+				console.log(msg);
 				res.redirect('/');
-			});
+			})
 		});
 
 	app.route('/register')
-		.get(function(req,res){
-			
+		.get(function(req,res){			
 			let location = req.url;
 			match({routes,location},(error,redirect,renderProps)=>{
-
 				if(renderProps){
 					let reactHtml = renderToString(<RouterContext {...renderProps} createElement={(Component,props)=><Component {...props} userdata={req.app.dataAddUser} msg={res.locals}/>} />);
 					res.render('renderReact',{reactHtml});
 				}
 			});
-			
-
 		})
 		.post(function(req,res){
 			let { name,username,password,password2 } = req.body;
@@ -73,11 +56,7 @@ module.exports = function(app){
 					data.errors = result.array();
 					req.app.dataAddUser = data;
 
-				if(!result.isEmpty()){					
-					//let data = {};
-					//data.userinfo = req.body;
-					//data.errors = result.array();
-					//req.app.dataAddUser = data;
+				if(!result.isEmpty()){										
 					res.redirect('/register');
 
 				}else{
