@@ -7,9 +7,7 @@ export default class AddUser extends Component{
 		name: "",
 		username: ""
 	};
-	//let dbErrorMessage = "";
-
-
+	
 	if(this.props.userdata){
 
 		let errors = this.props.userdata.errors;

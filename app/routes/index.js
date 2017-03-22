@@ -32,9 +32,8 @@ module.exports = function(app){
 			})
 		});
 
-	app.route('/user')
-		.get(function(req,res){
-			console.log(req.user);			
-			res.send("userpage after log in");
-		});
+	app.get('/logout', function(req,res,next){
+		req.logout();
+		res.status(200).end();
+	});
 }
