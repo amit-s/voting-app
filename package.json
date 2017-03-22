@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack -p",
-    "testitnode": "webpack --watch & nodemon server.js",
+    "nodewebpack": "webpack --watch & nodemon server.js",
     "start": "webpack-dev-server --inline --hot --content-base public/ --history-api-fallback"
   },
   "keywords": [],

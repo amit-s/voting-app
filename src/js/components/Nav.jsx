@@ -14,7 +14,7 @@ export default class Nav extends Component{
 							<button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="navbar-collapse-menu" aria-expanded="false">
 							<span className="sr-only">Toggle navigation</span>							
 							<span className="icon-bar">Sign In</span>
-							<span className="icon-bar">Register</span>
+							<span className="icon-bar">Register</span>}							
 							</button>
 							<a className="navbar-brand" href="/">Voting App</a>
 						</div>						
@@ -22,9 +22,10 @@ export default class Nav extends Component{
 							<ul className="nav navbar-nav">								
 								<li><NavLink to="/addpoll">Add Poll</NavLink></li>
 							</ul>
-							<ul className="nav navbar-nav navbar-right">
-								<li><NavLink to="/register" >Register</NavLink></li>
-								<li><NavLink to="/login" >Sign In</NavLink></li>
+							<ul className="nav navbar-nav navbar-right">							
+								{!localStorage.getItem('user') && <li><NavLink to="/register" >Register</NavLink></li>}
+								{!localStorage.getItem('user') && <li><NavLink to="/login" >Sign In</NavLink></li>}
+								{localStorage.getItem('user') && <li><NavLink to="/logout" >Logout</NavLink></li>}
 							</ul>
 						</div>
 					</div>

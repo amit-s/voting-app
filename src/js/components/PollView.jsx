@@ -6,8 +6,7 @@ import PollVote from './PollVote.jsx';
 export default class PollView extends Component{
 
 	constructor(props){
-		super(props);
-		//console.log(props);
+		super(props);		
 	}
 	
 	componentDidMount(){

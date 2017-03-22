@@ -43,8 +43,7 @@ Router.route('/')
 				if(!result.isEmpty()){										
 					res.redirect('/register');
 
-				}else{
-					//console.log('no errors');
+				}else{					
 					let newUser = req.body;
 					newUser.createdTime = req.time;
 					delete newUser['password2'];
