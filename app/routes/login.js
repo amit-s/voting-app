@@ -50,7 +50,8 @@ Router.use(function(req,res,next){
 });
 
 Router.route('/')
-		.get(function(req,res,next){			
+		.get(function(req,res,next){
+			
 			match({routes,location: req.originalUrl},(error,redirect,renderProps)=>{
 				if(renderProps){					
 					let reactHtml = renderToString(<RouterContext {...renderProps} createElement={(Component,props)=><Component {...props} msg={res.locals}/>}/>);
@@ -58,11 +59,30 @@ Router.route('/')
 				}
 			});			
 		})
-		.post(passport.authenticate('local', {failureRedirect: '/login', failureFlash: true}),
-			function(req,res,next){
-				console.log('you are logged in!');				
-				res.redirect('/user');
-			}
-		);
+		.post(function(req,res,next){
+			passport.authenticate('local', function(err,user,info){				
+
+				if(err){return next(err);}
+
+				if(!user){
+
+					return res.status(400).json({
+						success: false,
+						message: info.message
+					});
+
+				}
+
+				req.logIn(user, function(err){
+					if(err){ return next(err);}
+					res.status(200).json({
+						success: true,
+						message: 'you have logged in',
+						user: user.username
+					});
+				});
+
+			})(req,res,next);
+		});		
 
 module.exports = Router;

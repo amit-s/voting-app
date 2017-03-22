@@ -35,7 +35,7 @@ export default class Home extends Component{
 		});
 	}
 
-	componentDidMount(){				
+	componentWillMount(){				
 		queryDB().then(dbData=>this.setState({data: JSON.parse(dbData).data}),
 						err=>console.log(err))
 	}

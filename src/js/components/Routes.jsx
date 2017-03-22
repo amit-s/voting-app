@@ -6,6 +6,8 @@ import AddPoll from './AddPoll.jsx';
 import AddUser from './AddUser.jsx'
 import Login from './Login.jsx';
 import Nav from './Nav.jsx';
+import UserPage from './UserPage.jsx';
+import Logout from './Logout.jsx';
 
 module.exports = (
 	<Route path="/" component={Nav} >
@@ -14,5 +16,7 @@ module.exports = (
 		<Route path ="/addpoll" component={AddPoll} />
 		<Route path="/register" component={AddUser} />
 		<Route path="/login" component={Login} />
+		<Route path="/user/:username" component={UserPage} />
+		<Route path="/logout" component={Logout} />
 	</Route>
 );
