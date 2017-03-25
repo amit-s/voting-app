@@ -3,7 +3,6 @@ import React, {Component, PropTypes} from 'react';
 
 const AddUser = ({submit,change,value,errors})=>{
 		return(
-
 			<div>
 				{errors && errors.map((error,i)=><div key={i} className="alert alert-danger">{error.msg}</div>)}
 				

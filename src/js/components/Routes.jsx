@@ -2,9 +2,9 @@ import React from 'react';
 import {IndexRoute, Route} from 'react-router';
 import Home from './Home.jsx';
 import AddPoll from './AddPoll.jsx';
-import AddUser from './AddUser.jsx'
+//import AddUser from './AddUser.jsx'
 import Login from './Login.jsx';
-import Nav from './Nav.jsx';
+//import Nav from './Nav.jsx';
 import UserPage from './UserPage.jsx';
 import Logout from './Logout.jsx';
 import AppContainer from '../containers/AppContainer.jsx';

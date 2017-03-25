@@ -18,7 +18,6 @@ const Login = ({success,error,handleLogin,handleChange})=>(
 	</div>
 	)
 
-
 Login.propTypes = {
 	success: PropTypes.string,
 	error: PropTypes.string,
