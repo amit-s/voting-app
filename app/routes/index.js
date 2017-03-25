@@ -22,15 +22,13 @@ module.exports = function(app){
 	app.use('/login', loginRouter);
 
 	app.route('/')
-		.get(function(req,res){
-
+		.get(function(req,res){			
 			res.render('index');
 		})
 		.post(function(req,res){			
 			addPoll(req,db).then(function(msg){				
 				res.redirect('/');
-			})
-			console.log(req.user);
+			})			
 		});
 
 	app.get('/logout', function(req,res,next){

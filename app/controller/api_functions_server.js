@@ -43,34 +43,21 @@ export function comparePassword(inputPassword,hash,callback){
 
 };
 
-export function addPoll(req,db){
-	return new Promise((resolve,reject)=>{
-		let query = req.body;
-		let newItem = {};
-			newItem.options = [];
-	
-		for(var key in query){
-			if(key == "pollName"){
-				newItem.name = query[key];
-				newItem.timestamp = req.time;
-			}else{
-				newItem.options.push({name: query[key], count: 0});
-			}
-		}
-		
-		db.collection('general').insertOne(newItem, function(err){
+export function addPoll(db,newPoll){	
+	return new Promise((resolve,reject)=>{		
+		db.collection('polls').insertOne(newPoll, function(err){
 			if(err){
 				reject(err);
 			}else{
 				resolve('db item inserted');
 			}
-		});		
+		});
 	});
 }
 
 export function getPolls(db){
 	return new Promise((resolve,reject)=>{
-		db.collection('general').find({}).toArray(function(err,data){
+		db.collection('polls').find({}).toArray(function(err,data){
 			if(err){				
 				reject(err);
 			}
@@ -86,10 +73,9 @@ export function getPolls(db){
 export function updateVoteCount(db, newdata){
 	return new Promise((resolve,reject)=>{
 
-		db.collection('general').updateOne(
+		db.collection('polls').updateOne(
 			{
-				_id: ObjectID.createFromHexString(newdata._id)
-				
+				_id: ObjectID.createFromHexString(newdata._id)				
 			},
 			{
 				$set: {

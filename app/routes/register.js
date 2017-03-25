@@ -20,7 +20,7 @@ Router.route('/')
 		})
 		.post(function(req,res){
 			
-			let { name,username,password,password2 } = req.body;
+			//let { name,username,password,password2 } = req.body;
 
 			req.checkBody('name', 'Name is required').notEmpty();
 			req.checkBody('username', 'Username is required').notEmpty();
