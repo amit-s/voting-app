@@ -66,19 +66,11 @@ mongo.connect(mongoURL, function(err,db){
 	app.use(passport.initialize());
 	app.use(passport.session());
 
-	/*passport.serializeUser(function(user, done){
-		done(null, user.id);
-	});
-
-	passport.deserializeUser(function(id, done){
-		User.findById(id, function(err, user){
-			done(err, user);
-		});
-	});*/
-	
 	route(app);
 
-
+	app.all('*',function(req,res){
+		res.redirect('/');
+	});
 
 	app.listen(app.get('port'), function(err){
 		console.log(`Now listening on port ${app.get('port')}...`);

@@ -16,13 +16,7 @@ Router.use(function(req,res,next){
 
 Router.route('/')
 		.get(function(req,res){						
-			let location = req.originalUrl;			
-			match({routes,location},(error,redirect,renderProps)=>{
-				if(renderProps){
-					let reactHtml = renderToString(<RouterContext {...renderProps} createElement={(Component,props)=><Component {...props} userdata={req.app.dataAddUser} msg={res.locals}/>} />);
-					res.render('renderReact',{reactHtml});
-				}
-			});
+			
 		})
 		.post(function(req,res){
 			
@@ -33,16 +27,10 @@ Router.route('/')
 			req.checkBody('password', 'Password is required').notEmpty();
 			req.checkBody('password2', 'Passwords should match').equals(req.body.password);
 
-			req.getValidationResult().then(function(result){
+			req.getValidationResult().then(function(result){				
 
-				let data = {};
-					data.userinfo = req.body;
-					data.errors = result.array();
-					req.app.dataAddUser = data;
-
-				if(!result.isEmpty()){										
-					res.redirect('/register');
-
+				if(!result.isEmpty()){															
+					res.status(400).json({errors: result.array()});
 				}else{					
 					let newUser = req.body;
 					newUser.createdTime = req.time;
@@ -50,7 +38,7 @@ Router.route('/')
 					addUser(newUser,db).then((success)=>{
 						console.log(success);
 						req.flash('success_msg', 'Account successfully created. Go ahead and login below');					
-						res.redirect('/login');
+						res.status(200).json({'success_msg': 'Account successfully created. Go ahead and login below'});
 					}, (error)=>{
 						console.error('username exists');
 						req.flash('error_msg','Username already exists...');

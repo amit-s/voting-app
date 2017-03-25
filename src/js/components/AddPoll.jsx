@@ -28,6 +28,7 @@ export default class AddPoll extends Component{
 	}
 
 	render(){
+		
 		let options = [];
 		for(var i=0; i<this.state.optionCount; i++){
 			options.push(<input className="form-control" type="input" name={`option${i}`} key={i} />);

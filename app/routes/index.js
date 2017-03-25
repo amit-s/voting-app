@@ -30,10 +30,19 @@ module.exports = function(app){
 			addPoll(req,db).then(function(msg){				
 				res.redirect('/');
 			})
+			console.log(req.user);
 		});
 
 	app.get('/logout', function(req,res,next){
 		req.logout();
 		res.status(200).end();
+	});
+
+	app.get('/checkuserauth', function(req,res,next){
+		if(req.user){
+			res.status(200).end();
+		}else{
+			res.status(201).end();
+		}
 	});
 }
