@@ -8,18 +8,16 @@ export default class PollList extends Component{
 	}
 
 	getId(e){		
-		this.props.updatePoll(e.target.id);
+		this.props.updatePoll(e.target.value);		
 	}
 
 	render(){
-		let style = {
-			flexGrow: 1
-		};
-
 		return(
-			<div style={style}>
-				<h1>Poll List:</h1>
-				{this.props.data.map((item,i)=><div key={item._id} id={i} onClick={this.getId}>{item.name}</div>)}
+			<div>
+				<h1>Poll List:</h1>				
+				<select className="form-control" name="xxx" onChange={this.getId} >					
+					{this.props.data.map((poll,i)=><option key={i} value={i}>{poll.name}</option>)}
+				</select>
 			</div>
 			);
 	}

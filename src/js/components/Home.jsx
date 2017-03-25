@@ -41,8 +41,9 @@ export default class Home extends Component{
 	}
 
 	renderHome(){
-		let style = {display: "flex"};
-		return (<div style={style}>
+		//let style = {display: "flex"};
+		//return (<div style={style}>
+		return (<div>
 					<PollList data={this.state.data} updatePoll={this.updateSelectedPoll}/>
 					<PollView data={this.state.data[this.state.selectedPoll]} getvote={this.updateDataCount}/>
 				</div>);
