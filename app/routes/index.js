@@ -37,8 +37,8 @@ module.exports = function(app){
 	});
 
 	app.get('/checkuserauth', function(req,res,next){
-		if(req.user){
-			res.status(200).end();
+		if(req.user){			
+			res.status(200).json({username: req.user.username});;
 		}else{
 			res.status(201).end();
 		}

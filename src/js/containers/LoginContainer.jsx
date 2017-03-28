@@ -34,7 +34,7 @@ export default class LoginContainer extends Component{
 					error: ""
 				});				
 				
-				this.props.updateAuth(true);
+				this.props.updateAuth(true,user);
 				browserHistory.push(`/user/${user}`);
 			}
 		};

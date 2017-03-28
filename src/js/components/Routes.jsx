@@ -7,6 +7,7 @@ import AppContainer from '../containers/AppContainer.jsx';
 import LoginContainer from '../containers/LoginContainer.jsx';
 import AddUserContainer from '../containers/AddUserContainer.jsx';
 import AddPollContainer from '../containers/AddPollContainer.jsx';
+import UserPageContainer from '../containers/UserPageContainer.jsx';
 
 
 
@@ -16,7 +17,7 @@ module.exports = (
 		<Route path ="/addpoll" component={AddPollContainer} />
 		<Route path="/register" component={AddUserContainer} />
 		<Route path="/login" component={LoginContainer} />
-		<Route path="/user/:username" component={UserPage} />
+		<Route path="/user/:username" component={UserPageContainer} />
 		<Route path="/logout" component={Logout} />
 	</Route>
 );

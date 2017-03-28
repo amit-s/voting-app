@@ -10,10 +10,14 @@ export function updateDB(params){
 		xhr.send(params);
 }
 
-export function queryDB(){
-	return new Promise(function(resolve,reject){
+export function queryDB(username){
+	return new Promise(function(resolve,reject){		
+		let params = `username=${username}`;
+
 		let xhr = new XMLHttpRequest();
-			xhr.open('GET', '/api/data', true);
+
+			xhr.open('GET', `/api/data/?${params}`, true);
+
 			xhr.onload = function(){				
 				if(xhr.status == 200){
 					resolve(xhr.responseText);

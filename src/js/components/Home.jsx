@@ -36,13 +36,11 @@ export default class Home extends Component{
 	}
 
 	componentWillMount(){				
-		queryDB().then(dbData=>this.setState({data: JSON.parse(dbData).data}),
+		queryDB("").then(dbData=>this.setState({data: JSON.parse(dbData).data}),
 						err=>console.log(err))
 	}
 
-	renderHome(){
-		//let style = {display: "flex"};
-		//return (<div style={style}>
+	renderHome(){		
 		return (<div>
 					<PollList data={this.state.data} updatePoll={this.updateSelectedPoll}/>
 					<PollView data={this.state.data[this.state.selectedPoll]} getvote={this.updateDataCount}/>

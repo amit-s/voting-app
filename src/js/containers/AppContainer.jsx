@@ -6,23 +6,29 @@ export default class AppContainer extends Component{
 		super(props);
 
 		this.state = {
-			isUserAuthenticated: false
+			isUserAuthenticated: false,
+			username: ""
 		};
 
 		this.checkAuth = this.checkAuth.bind(this);
 		this.updateAuth = this.updateAuth.bind(this);
+		this.getUsername = this.getUsername.bind(this);
 	}
 
 	checkAuth(){
 		return this.state.isUserAuthenticated;
 	}
 
-	updateAuth(isUserAuthenticated){
-		this.setState({isUserAuthenticated});
+	updateAuth(isUserAuthenticated,username){
+		this.setState({isUserAuthenticated, username});
+	}
+
+	getUsername(){
+		return this.state.username;
 	}
 
 	renderChildren(children){
-		return React.Children.map(children, child=>React.cloneElement(child,{checkAuth: this.checkAuth, updateAuth: this.updateAuth}));
+		return React.Children.map(children, child=>React.cloneElement(child,{checkAuth: this.checkAuth, updateAuth: this.updateAuth, getUsername: this.getUsername}));
 	}
 
 	componentDidMount(){
@@ -33,6 +39,8 @@ export default class AppContainer extends Component{
 
 			if(xhr.status === 200){
 				isUserAuthenticated = true;
+				let username = JSON.parse(xhr.response).username;
+				this.setState({username});
 			}else{
 				isUserAuthenticated = false;
 			}

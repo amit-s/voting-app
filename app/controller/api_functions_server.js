@@ -55,9 +55,10 @@ export function addPoll(db,newPoll){
 	});
 }
 
-export function getPolls(db){
+export function getPolls(db,username){
 	return new Promise((resolve,reject)=>{
-		db.collection('polls').find({}).toArray(function(err,data){
+		let query = username ? {createdBy: username} : {};		
+		db.collection('polls').find(query).toArray(function(err,data){
 			if(err){				
 				reject(err);
 			}
