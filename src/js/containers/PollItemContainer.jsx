@@ -9,7 +9,8 @@ export default class PollItemContainer extends Component{
 
 	handleClick(e){		
 		this.props.updateUserPageView(true);				
-		console.log(e.target.parentNode.id);
+		//console.log(e.target.parentNode.id);
+		this.props.updateSelectedPoll(e.target.parentNode.id);
 	}
 
 	render(){
@@ -20,7 +21,7 @@ export default class PollItemContainer extends Component{
 
 		return(
 			<div style={style}>
-				{this.props.data.map((poll,i)=>(<PollItem pollData={poll} key={i} handleClick={this.handleClick} />))}				
+				{this.props.data.map((poll,i)=>(<PollItem pollData={poll} key={i} id={i} handleClick={this.handleClick} />))}
 			</div>
 			);
 	}

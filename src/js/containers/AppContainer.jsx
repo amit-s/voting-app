@@ -50,10 +50,11 @@ export default class AppContainer extends Component{
 	}
 
 	render(){
-		
+		let username = this.state.username || "";
+
 		return(
 			<div>
-				<Nav isUserAuthenticated={this.state.isUserAuthenticated} />
+				<Nav isUserAuthenticated={this.state.isUserAuthenticated} username={username} />
 				{this.renderChildren(this.props.children)}
 			</div>
 			);

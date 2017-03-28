@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import * as d3 from 'd3';
 import renderChart from '../d3chart.js';
-import PollVote from './PollVote.jsx';
 
-export default class PollView extends Component{
+
+export default class PollChart extends Component{
 
 	constructor(props){
 		super(props);		
@@ -42,7 +42,7 @@ export default class PollView extends Component{
 				<h1>{this.props.data.name}</h1>
 				<div id="chart">
 					<svg></svg>
-					<PollVote getvote={this.props.getvote} data={this.props.data}/>
+					
 				</div>
 			</div>
 			);

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const PollItem = ({pollData,handleClick})=>{
+const PollItem = ({pollData,handleClick,id})=>{
 	let date = new Date(pollData.createdTime);
 	let style = {
 		borderWidth: 1,
@@ -12,7 +12,7 @@ const PollItem = ({pollData,handleClick})=>{
 
 
 	return(
-		<div style={style} onClick={(handleClick)} id={pollData.name}>
+		<div style={style} onClick={(handleClick)} id={id}>
 			<div>{pollData.name}</div>
 			<div>Total Votes {pollData.options.reduce((total,option)=>(total + option.count),0)}</div>
 			<div>Created by {pollData.createdBy} on {date.toLocaleDateString()}</div>

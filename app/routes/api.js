@@ -13,9 +13,7 @@ Router.use(function(req,res,next){
 });
 
 Router.route('/data')
-	.get(function(req,res){
-		//console.log(`apijs17 ${req.query}`);
-//		console.log(req.query.username);
+	.get(function(req,res){		
 		getPolls(db,req.query.username).then(
 			data=>res.json({data}),
 			err=>console.log(err)

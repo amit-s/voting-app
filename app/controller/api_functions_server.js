@@ -58,7 +58,7 @@ export function addPoll(db,newPoll){
 export function getPolls(db,username){
 	return new Promise((resolve,reject)=>{
 		let query = username ? {createdBy: username} : {};		
-		db.collection('polls').find(query).toArray(function(err,data){
+		db.collection('polls').find(query).sort({'createdTime': -1}).toArray(function(err,data){
 			if(err){				
 				reject(err);
 			}

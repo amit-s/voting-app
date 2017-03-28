@@ -35,7 +35,7 @@ export default class AddPollContainer extends Component{
 
 	handleSubmit(e){
 		e.preventDefault();
-		
+		let username = this.props.getUsername();		
 		let {pollName,options} = this.state;		
 		let params = `name=${pollName}`;
 		
@@ -48,7 +48,7 @@ export default class AddPollContainer extends Component{
 		xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
 		xhr.onload = ()=>{
 			if(xhr.status === 200){
-				browserHistory.push('/');
+				browserHistory.push(`/${username}/polls`);
 			}else{
 				let errors = JSON.parse(xhr.response).errors;
 				this.setState({errors});

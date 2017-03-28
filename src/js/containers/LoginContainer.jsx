@@ -35,7 +35,7 @@ export default class LoginContainer extends Component{
 				});				
 				
 				this.props.updateAuth(true,user);
-				browserHistory.push(`/user/${user}`);
+				browserHistory.push(`/${user}/polls`);
 			}
 		};
 		xhr.send(params);

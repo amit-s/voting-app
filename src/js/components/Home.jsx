@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PollList from './PollList.jsx';
-import PollView from './PollView.jsx';
+//import PollView from './PollView.jsx';
 import {updateDB, queryDB} from '../../../app/controller/api_functions_client.js';
 
 export default class Home extends Component{
@@ -43,7 +43,7 @@ export default class Home extends Component{
 	renderHome(){		
 		return (<div>
 					<PollList data={this.state.data} updatePoll={this.updateSelectedPoll}/>
-					<PollView data={this.state.data[this.state.selectedPoll]} getvote={this.updateDataCount}/>
+					{/*<PollView data={this.state.data[this.state.selectedPoll]} getvote={this.updateDataCount}/>*/}
 				</div>);
 	}
 
