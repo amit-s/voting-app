@@ -7,13 +7,9 @@ export default class PollChart extends Component{
 
 	constructor(props){
 		super(props);		
-	}
-	
-	componentDidMount(){
-		renderChart(this.props.data);
-	}
+	}	
 
-	componentDidUpdate(){
+	componentDidMount(){
 		let empty = true;
 		this.props.data.options.forEach(function(option){			
 			if(option.count != 0){
@@ -32,7 +28,7 @@ export default class PollChart extends Component{
 				.append("text")				
 				.text("No Votes yet...")
 				.attr("x", 100)
-				.attr("y", 100)			
+				.attr("y", 50)			
 		}
 	}
 
