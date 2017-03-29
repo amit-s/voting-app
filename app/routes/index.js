@@ -40,7 +40,12 @@ module.exports = function(app){
 		if(req.user){			
 			res.status(200).json({username: req.user.username});;
 		}else{
-			res.status(201).end();
+			let patternIP = /(\d+\.){3}\d+/;
+			let headerIP = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+			let ip = patternIP.exec(headerIP)[0];
+			
+			res.status(201).json({ip});
+			//res.status(201).end();
 		}
 	});
 }

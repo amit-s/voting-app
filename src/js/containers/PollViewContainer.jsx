@@ -12,11 +12,12 @@ export default class PollViewContainer extends Component{
 	}
 
 	render(){
+//console.log(this.props);
 		return(
 			<div>
 				<div onClick={this.handleBackClick.bind(this)}>Back</div>
 				<PollChart data={this.props.data} />
-				<PollVoteContainer getvote={this.props.handleVote} data={this.props.data}/>
+				<PollVoteContainer getvote={this.props.handleVote} data={this.props.data} checkAuth={this.props.checkAuth} getIP={this.props.getIP} getUsername={this.props.getUsername} />
 			</div>
 			);
 	}

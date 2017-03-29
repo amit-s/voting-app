@@ -7,12 +7,14 @@ export default class AppContainer extends Component{
 
 		this.state = {
 			isUserAuthenticated: false,
-			username: ""
+			username: "",
+			ip: ""
 		};
 
 		this.checkAuth = this.checkAuth.bind(this);
 		this.updateAuth = this.updateAuth.bind(this);
 		this.getUsername = this.getUsername.bind(this);
+		this.getIP = this.getIP.bind(this);
 	}
 
 	checkAuth(){
@@ -27,8 +29,12 @@ export default class AppContainer extends Component{
 		return this.state.username;
 	}
 
+	getIP(){
+		return this.state.ip;
+	}
+
 	renderChildren(children){
-		return React.Children.map(children, child=>React.cloneElement(child,{checkAuth: this.checkAuth, updateAuth: this.updateAuth, getUsername: this.getUsername}));
+		return React.Children.map(children, child=>React.cloneElement(child,{checkAuth: this.checkAuth, updateAuth: this.updateAuth, getUsername: this.getUsername, getIP: this.getIP}));
 	}
 
 	componentDidMount(){
@@ -36,15 +42,18 @@ export default class AppContainer extends Component{
 		xhr.open('GET', '/checkuserauth', true);
 		xhr.onload = ()=>{
 			let isUserAuthenticated;
+			let ip = JSON.parse(xhr.response).ip;
 
 			if(xhr.status === 200){
 				isUserAuthenticated = true;
 				let username = JSON.parse(xhr.response).username;
-				this.setState({username});
-			}else{
+				this.setState({username,ip});
+			}else{				
 				isUserAuthenticated = false;
+				
+				this.setState({ip});
 			}
-			this.setState({isUserAuthenticated});			
+			this.setState({isUserAuthenticated});
 		};
 		xhr.send();
 	}

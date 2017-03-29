@@ -27,7 +27,8 @@ export default class UserPageContainer extends Component{
 		this.setState({selectedPoll});
 	}
 
-	handleVote(newdata){		
+	handleVote(newdata){
+		
 		let data = this.state.data.map(function(item){
 			if(item._id == newdata._id){
 				return newdata;
@@ -64,12 +65,13 @@ export default class UserPageContainer extends Component{
 			}, (error)=>(console.log(error)));
 	}
 
-	render(){		
+	render(){
+		//console.log(this.props);
 		return(
 			<div>
 				{this.state.data.length > 0 || <h3>You have no polls. Go ahead and create one.</h3>}
 				{!this.state.displayPollView && <PollItemContainer data={this.state.data} updateUserPageView={this.updateUserPageView} updateSelectedPoll={this.updateSelectedPoll} />}
-				{this.state.displayPollView && <PollViewContainer data={this.state.data[this.state.selectedPoll]} updateUserPageView={this.updateUserPageView} handleVote={this.handleVote} />}
+				{this.state.displayPollView && <PollViewContainer data={this.state.data[this.state.selectedPoll]} updateUserPageView={this.updateUserPageView} handleVote={this.handleVote} checkAuth={this.props.checkAuth} getIP={this.props.getIP} getUsername={this.props.getUsername} />}
 			</div>
 			);
 	}
