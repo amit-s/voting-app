@@ -7,7 +7,7 @@ const Logout = ({updateAuth})=>{
 		xhr.onload = function(){
 			if(xhr.status == 200){
 				updateAuth(false);
-				browserHistory.push('/login');
+				browserHistory.push('/');
 			}
 		};
 		xhr.send();
