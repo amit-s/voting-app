@@ -45,6 +45,11 @@ export function comparePassword(inputPassword,hash,callback){
 
 export function addPoll(db,newPoll){
 	return new Promise((resolve,reject)=>{
+		newPoll.votes = {
+			user: [],
+			ip: []
+		};
+		
 		db.collection('polls').insertOne(newPoll, function(err){
 			if(err){
 				reject(err);
@@ -80,7 +85,8 @@ export function updateVoteCount(db, newdata){
 			},
 			{
 				$set: {
-					options: [...newdata.options]
+					options: [...newdata.options],
+					votes: newdata.votes
 				}
 			},
 			function(err){

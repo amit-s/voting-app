@@ -21,6 +21,7 @@ Router.route('/data')
 	})
 	.post(function(req,res){
 		let newdata = JSON.parse(req.body.data);
+		
 		updateVoteCount(db,newdata).then(success=>console.log(success),error=>console.log(error));
 		res.end();
 	});
