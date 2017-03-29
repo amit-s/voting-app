@@ -31,6 +31,7 @@ export default class AddUserContainer extends Component{
 				browserHistory.push('/login');
 			}else{
 				let errors = JSON.parse(xhr.response).errors;
+				//console.log(errors);
 				this.setState({errors});
 				document.getElementById("password").value = "";
 				document.getElementById("password2").value = "";

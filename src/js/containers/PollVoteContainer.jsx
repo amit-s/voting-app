@@ -12,6 +12,9 @@ export default class PollVoteContainer extends Component{
 
 	handleChange(e){
 		let selectedOption = e.target.value;
+		if(selectedOption === 'select'){
+			return;
+		}
 		let newdata = JSON.parse(JSON.stringify(this.props.data));
 		newdata.options.forEach(function(option){
 			if(option.name == selectedOption){

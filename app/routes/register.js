@@ -15,38 +15,35 @@ Router.use(function(req,res,next){
 
 
 Router.route('/')
-		.get(function(req,res){						
+		.get(function(req,res){
 			
 		})
 		.post(function(req,res){
-			
-			//let { name,username,password,password2 } = req.body;
 
 			req.checkBody('name', 'Name is required').notEmpty();
 			req.checkBody('username', 'Username is required').notEmpty();
 			req.checkBody('password', 'Password is required').notEmpty();
 			req.checkBody('password2', 'Passwords should match').equals(req.body.password);
 
-			req.getValidationResult().then(function(result){				
+			req.getValidationResult().then(function(result){
 
-				if(!result.isEmpty()){															
-					res.status(400).json({errors: result.array()});
-				}else{					
+				if(!result.isEmpty()){
+					res.status(201).json({errors: result.array()});
+				}else{
 					let newUser = req.body;
 					newUser.createdTime = req.time;
 					delete newUser['password2'];
 					addUser(newUser,db).then((success)=>{
 						console.log(success);
-						req.flash('success_msg', 'Account successfully created. Go ahead and login below');					
+						req.flash('success_msg', 'Account successfully created. Go ahead and login below');
 						res.status(200).json({'success_msg': 'Account successfully created. Go ahead and login below'});
 					}, (error)=>{
 						console.error('username exists');
-						req.flash('error_msg','Username already exists...');
-						res.redirect('/register');
+						res.status(201).json({errors: [{msg: 'Username already exists'}]});
 					});
 					
 				}
-			});			
+			});
 		});
 
 module.exports = Router;

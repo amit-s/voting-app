@@ -13,14 +13,14 @@ Router.use(function(req,res,next){
 });
 
 Router.route('/data')
-	.get(function(req,res){		
+	.get(function(req,res){
 		getPolls(db,req.query.username).then(
 			data=>res.send({data}),
 			err=>console.log(err)
 		);
 	})
 	.post(function(req,res){
-		let newdata = JSON.parse(req.body.data);		
+		let newdata = JSON.parse(req.body.data);
 		updateVoteCount(db,newdata).then(success=>console.log(success),error=>console.log(error));
 		res.end();
 	});
@@ -32,7 +32,7 @@ Router.route('/data')
 				req.checkBody('option1', 'Second option is required').notEmpty();
 
 				req.getValidationResult().then(function(result){
-					if(!result.isEmpty()){															
+					if(!result.isEmpty()){
 						res.status(400).json({errors: result.array()});
 					}else{
 						let pollData = req.body;

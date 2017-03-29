@@ -1,20 +1,20 @@
 import bcrypt from 'bcryptjs';
 let ObjectID = require('mongodb').ObjectID;
 
-export function addUser(newUser,db){	
+export function addUser(newUser,db){
 	let user = Object.assign({},newUser);
 	
 	return new Promise((resolve,reject)=>{
 		bcrypt.genSalt(10, function(err, salt) {
 		    bcrypt.hash(user.password, salt, function(err, hash) {
-		        user.password = hash;	        
+		        user.password = hash;
 	        	db.collection('users').insertOne(user, function(err){
 	        		if(err){
 	        			reject(err);
 	        		}else{
 	        			resolve('User added to DB');
 	        		}
-	        	});	        
+	        	});
 		    });
 		});
 	});	
@@ -43,8 +43,8 @@ export function comparePassword(inputPassword,hash,callback){
 
 };
 
-export function addPoll(db,newPoll){	
-	return new Promise((resolve,reject)=>{		
+export function addPoll(db,newPoll){
+	return new Promise((resolve,reject)=>{
 		db.collection('polls').insertOne(newPoll, function(err){
 			if(err){
 				reject(err);
@@ -55,16 +55,16 @@ export function addPoll(db,newPoll){
 	});
 }
 
-export function getPolls(db,username){
+export function getPolls(db,username){	
 	return new Promise((resolve,reject)=>{
-		let query = username ? {createdBy: username} : {};		
+		let query = username ? {createdBy: username} : {};
 		db.collection('polls').find(query).sort({'createdTime': -1}).toArray(function(err,data){
-			if(err){				
+			if(err){
 				reject(err);
 			}
-			if(data.length<1){				
+			if(data.length<1){
 				reject('database is empty');
-			}else{				
+			}else{
 				resolve(data);
 			}
 		});
@@ -76,7 +76,7 @@ export function updateVoteCount(db, newdata){
 
 		db.collection('polls').updateOne(
 			{
-				_id: ObjectID.createFromHexString(newdata._id)				
+				_id: ObjectID.createFromHexString(newdata._id)
 			},
 			{
 				$set: {

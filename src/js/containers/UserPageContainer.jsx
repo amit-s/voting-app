@@ -16,6 +16,7 @@ export default class UserPageContainer extends Component{
 		this.updateUserPageView = this.updateUserPageView.bind(this);
 		this.updateSelectedPoll = this.updateSelectedPoll.bind(this);
 		this.handleVote = this.handleVote.bind(this);
+		this.updateDataset = this.updateDataset.bind(this);
 	}
 
 	updateUserPageView(status){
@@ -57,10 +58,10 @@ export default class UserPageContainer extends Component{
 			username = this.props.getUsername();
 		}		
 
-		queryDB(username).then((data)=>{			
-				let userdata = JSON.parse(data).data;
-				this.setState({data: userdata})
-			});
+		queryDB(username).then((userdata)=>{
+				let data = userdata.data;
+				this.setState({data});
+			}, (error)=>(console.log(error)));
 	}
 
 	render(){		
