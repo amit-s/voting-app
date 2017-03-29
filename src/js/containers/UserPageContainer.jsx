@@ -40,13 +40,13 @@ export default class UserPageContainer extends Component{
 		this.setState({data});
 	}
 
-	componentDidMount(){		
+	componentDidMount(){
 		this.updateDataset(this.props);
 	}
 
-	componentWillReceiveProps(nextProps){		
+	componentWillReceiveProps(nextProps){
 		this.setState({displayPollView: false});
-		this.updateDataset(nextProps);		
+		this.updateDataset(nextProps);
 	}
 
 	updateDataset(props){
@@ -55,7 +55,7 @@ export default class UserPageContainer extends Component{
 			username = "";
 		}else{
 			username = this.props.getUsername();
-		}
+		}		
 
 		queryDB(username).then((data)=>{			
 				let userdata = JSON.parse(data).data;
@@ -63,7 +63,7 @@ export default class UserPageContainer extends Component{
 			});
 	}
 
-	render(){
+	render(){		
 		return(
 			<div>
 				{this.state.data.length > 0 || <h3>You have no polls. Go ahead and create one.</h3>}

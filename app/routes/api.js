@@ -15,7 +15,7 @@ Router.use(function(req,res,next){
 Router.route('/data')
 	.get(function(req,res){		
 		getPolls(db,req.query.username).then(
-			data=>res.json({data}),
+			data=>res.send({data}),
 			err=>console.log(err)
 		);
 	})
