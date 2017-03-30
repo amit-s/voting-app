@@ -4,7 +4,7 @@ import PollItem from '../components/PollItem.jsx';
 export default class PollItemContainer extends Component{
 	constructor(props){
 		super(props);
-		this.handleClick = this.handleClick.bind(this);
+		this.handleClick = this.handleClick.bind(this);		
 	}
 
 	handleClick(e){		
@@ -13,11 +13,13 @@ export default class PollItemContainer extends Component{
 		this.props.updateSelectedPoll(e.target.parentNode.id);
 	}
 
+
 	render(){
 		let style = {
 			display: 'flex',
 			flexWrap: 'wrap'
 		};
+		
 
 		return(
 			<div style={style}>
