@@ -1,7 +1,11 @@
-import PollVote from '../components/PollVote.jsx';
 import React,{Component} from 'react';
+import {browserHistory} from 'react-router';
+import PollVote from '../components/PollVote.jsx';
+import DeletePoll from '../components/DeletePoll.jsx';
+import {deletePoll} from '../../../app/controller/api_functions_client.js'
 
-export default class PollVoteContainer extends Component{
+
+export default class PollControlsContainer extends Component{
 	constructor(props){
 		super(props);
 		this.state = {
@@ -13,6 +17,7 @@ export default class PollVoteContainer extends Component{
 		};
 		this.handleChange = this.handleChange.bind(this);
 		this.hasUserVoted = this.hasUserVoted.bind(this);
+		this.handleDelete = this.handleDelete.bind(this);
 	}
 
 	handleChange(e){
@@ -61,7 +66,17 @@ export default class PollVoteContainer extends Component{
 			});
 		}
 		this.setState({hasUserVoted: hasVoted});
-	}	
+	}
+
+	handleDelete(pollname){		
+		deletePoll(pollname).then(
+			(success)=>{				
+				browserHistory.push(`/${this.state.username}/polls`);
+				this.props.updateData(pollname);
+			},
+			(error)=>console.log(error)
+			);
+	}
 
 	componentWillMount(){
 		let authorizedUser = this.props.checkAuth();
@@ -72,13 +87,15 @@ export default class PollVoteContainer extends Component{
 
 	componentDidMount(){
 		this.hasUserVoted();
+
 	}
 
-	render(){
+	render(){		
 		return(
 			<div>
 				{!this.state.hasUserVoted && <PollVote data={this.props.data} getVote={this.handleChange} />}
-				{this.state.hasUserVoted && <h3>You have voted for {this.state.userVote}</h3>}
+				{this.state.hasUserVoted && <h3>You voted for {this.state.userVote}</h3>}
+				{this.props.ownPoll && <DeletePoll handleDelete={this.handleDelete} pollname={this.props.data.name} />}
 			</div>
 			);
 	}

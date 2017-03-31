@@ -32,7 +32,7 @@ export default class PollChart extends Component{
 		}
 	}
 
-	componentDidUpdate(){
+	componentDidUpdate(){		
 		renderChart(this.props.data);
 	}
 

@@ -44,8 +44,16 @@ module.exports = function(app){
 			let headerIP = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
 			let ip = patternIP.exec(headerIP)[0];
 			
-			res.status(201).json({ip});
-			//res.status(201).end();
+			res.status(201).json({ip});			
 		}
+	});
+
+	app.post('/deletepoll', function(req,res){		
+		let query = {
+			name: req.body.pollname
+		};
+		db.collection('polls').remove(query).then(()=>{			
+			res.status(200).end();
+		});
 	});
 }

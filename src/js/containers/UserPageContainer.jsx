@@ -17,6 +17,7 @@ export default class UserPageContainer extends Component{
 		this.updateSelectedPoll = this.updateSelectedPoll.bind(this);
 		this.handleVote = this.handleVote.bind(this);
 		this.updateDataset = this.updateDataset.bind(this);
+		this.deletePollFromData = this.deletePollFromData.bind(this);
 	}
 
 	updateUserPageView(status){
@@ -65,13 +66,18 @@ export default class UserPageContainer extends Component{
 			}, (error)=>(console.log(error)));
 	}
 
-	render(){
-		//console.log(this.props);
+	deletePollFromData(pollname){
+		let data = JSON.parse(JSON.stringify(this.state.data));
+		data = data.filter((poll)=>poll.name !== pollname);		
+		this.setState({data});
+	}
+
+	render(){		
 		return(
 			<div>
 				{this.state.data.length > 0 || <h3>You have no polls. Go ahead and create one.</h3>}
 				{!this.state.displayPollView && <PollItemContainer data={this.state.data} updateUserPageView={this.updateUserPageView} updateSelectedPoll={this.updateSelectedPoll} />}
-				{this.state.displayPollView && <PollViewContainer data={this.state.data[this.state.selectedPoll]} updateUserPageView={this.updateUserPageView} handleVote={this.handleVote} checkAuth={this.props.checkAuth} getIP={this.props.getIP} getUsername={this.props.getUsername} />}
+				{this.state.displayPollView && <PollViewContainer data={this.state.data[this.state.selectedPoll]} updateData={this.deletePollFromData} updateUserPageView={this.updateUserPageView} handleVote={this.handleVote} checkAuth={this.props.checkAuth} getIP={this.props.getIP} getUsername={this.props.getUsername} />}
 			</div>
 			);
 	}
