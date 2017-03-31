@@ -1,6 +1,7 @@
 import React,{Component} from 'react';
 import {browserHistory} from 'react-router';
 import PollVote from '../components/PollVote.jsx';
+import AddPollOptionContainer from './AddPollOptionContainer.jsx';
 import DeletePoll from '../components/DeletePoll.jsx';
 import {deletePoll} from '../../../app/controller/api_functions_client.js'
 
@@ -13,7 +14,8 @@ export default class PollControlsContainer extends Component{
 			userVote: "",
 			authorizedUser: false,
 			username: "",
-			ip: ""
+			ip: "",
+			showAddOption: false
 		};
 		this.handleChange = this.handleChange.bind(this);
 		this.hasUserVoted = this.hasUserVoted.bind(this);
@@ -65,12 +67,18 @@ export default class PollControlsContainer extends Component{
 				}
 			});
 		}
-		this.setState({hasUserVoted: hasVoted});
+		let update = {};
+		update.hasUserVoted = hasVoted;
+
+		if(this.state.authorizedUser && !hasVoted){
+			update.showAddOption = true;
+		}		
+		this.setState(update);		
 	}
 
 	handleDelete(pollname){		
 		deletePoll(pollname).then(
-			(success)=>{				
+			(success)=>{
 				browserHistory.push(`/${this.state.username}/polls`);
 				this.props.updateData(pollname);
 			},
@@ -81,20 +89,25 @@ export default class PollControlsContainer extends Component{
 	componentWillMount(){
 		let authorizedUser = this.props.checkAuth();
 		let username = this.props.getUsername();
-		let ip = this.props.getIP();		
-		this.setState({authorizedUser,username,ip});
+		let ip = this.props.getIP();
+		this.setState({authorizedUser,username,ip},function(){
+			this.hasUserVoted();
+		});
+		
 	}
 
-	componentDidMount(){
-		this.hasUserVoted();
+	
 
+	componentWillReceiveProps(){
+		this.setState({showAddOption: false})
 	}
 
-	render(){		
+	render(){
 		return(
 			<div>
 				{!this.state.hasUserVoted && <PollVote data={this.props.data} getVote={this.handleChange} />}
-				{this.state.hasUserVoted && <h3>You voted for {this.state.userVote}</h3>}
+				{this.state.hasUserVoted && <h3>You voted for "{this.state.userVote}"</h3>}
+				{this.state.showAddOption && <AddPollOptionContainer addNewOption={this.props.addNewOption} data={this.props.data} />}
 				{this.props.ownPoll && <DeletePoll handleDelete={this.handleDelete} pollname={this.props.data.name} />}
 			</div>
 			);

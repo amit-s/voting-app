@@ -75,7 +75,7 @@ export default class UserPageContainer extends Component{
 	render(){		
 		return(
 			<div>
-				{this.state.data.length > 0 || <h3>You have no polls. Go ahead and create one.</h3>}
+				{this.state.data.length > 0 || <h3>Create your first poll by clicking "Add Poll" above!</h3>}
 				{!this.state.displayPollView && <PollItemContainer data={this.state.data} updateUserPageView={this.updateUserPageView} updateSelectedPoll={this.updateSelectedPoll} />}
 				{this.state.displayPollView && <PollViewContainer data={this.state.data[this.state.selectedPoll]} updateData={this.deletePollFromData} updateUserPageView={this.updateUserPageView} handleVote={this.handleVote} checkAuth={this.props.checkAuth} getIP={this.props.getIP} getUsername={this.props.getUsername} />}
 			</div>

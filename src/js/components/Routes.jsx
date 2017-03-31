@@ -1,6 +1,6 @@
 import React from 'react';
 import {IndexRoute, Route} from 'react-router';
-import Home from './Home.jsx';
+//import Home from './Home.jsx';
 import Welcome from './Welcome.jsx';
 //import UserPage from './UserPage.jsx';
 import Logout from './Logout.jsx';
