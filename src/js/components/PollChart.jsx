@@ -23,6 +23,8 @@ export default class PollChart extends Component{
 			d3.select("svg")
 				.selectAll("*").remove();
 			d3.select("svg")
+				.attr("width",350)
+				.attr("height",350)
 				.append("g")
 				.attr("id","emptynotify")
 				.append("text")				
