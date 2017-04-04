@@ -48,10 +48,10 @@ export default class PollViewContainer extends Component{
 	render(){		
 		return(
 			<div>
-				<div onClick={this.handleBackClick.bind(this)}>Back</div>
-				{this.state.data.name && <PollChart data={this.state.data} />}
+				<h1>{this.state.data.name}</h1>				
 				{/*<PollControlsContainer getvote={this.props.handleVote} data={this.state.data} updateData={this.props.updateData} addNewOption={this.addNewOption} checkAuth={this.props.checkAuth} getIP={this.props.getIP} getUsername={this.props.getUsername} ownPoll={this.state.ownPoll} />*/}
 				{this.state.data.name && <PollControlsContainer data={this.state.data} getVote={this.handleVote} addNewOption={this.addNewOption} checkAuth={this.props.checkAuth} getIP={this.props.getIP} getUsername={this.props.getUsername} ownPoll={this.state.ownPoll} />}
+				{this.state.data.name && <PollChart data={this.state.data} />}
 			</div>
 			);
 	}
