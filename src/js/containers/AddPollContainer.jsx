@@ -48,7 +48,7 @@ export default class AddPollContainer extends Component{
 		xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
 		xhr.onload = ()=>{
 			if(xhr.status === 200){
-				browserHistory.push(`/${username}/polls`);
+				browserHistory.push(`/u/${username}`);
 			}else{
 				let errors = JSON.parse(xhr.response).errors;
 				this.setState({errors});

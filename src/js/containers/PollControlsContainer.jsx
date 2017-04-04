@@ -39,8 +39,9 @@ export default class PollControlsContainer extends Component{
 				option.count++;
 			}
 		});
+		this.props.getVote(newdata);
 		this.setState({hasUserVoted: true, userVote: selectedOption });
-		this.props.getvote(newdata);
+		
 	}
 
 	hasUserVoted(){
@@ -79,8 +80,9 @@ export default class PollControlsContainer extends Component{
 	handleDelete(pollname){		
 		deletePoll(pollname).then(
 			(success)=>{
-				browserHistory.push(`/${this.state.username}/polls`);
-				this.props.updateData(pollname);
+				//browserHistory.push(`/${this.state.username}/polls`);
+				browserHistory.push(`/u/${this.state.username}`);
+				//this.props.updateData(pollname);
 			},
 			(error)=>console.log(error)
 			);

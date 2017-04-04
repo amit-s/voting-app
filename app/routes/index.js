@@ -56,4 +56,8 @@ module.exports = function(app){
 			res.status(200).end();
 		});
 	});
+
+	app.get('/p/:pollid',function(req,res){		
+		res.redirect(`/?pollid=${req.params.pollid}`);
+	});
 }

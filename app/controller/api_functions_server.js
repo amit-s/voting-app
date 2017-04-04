@@ -34,6 +34,12 @@ export function getUserById(id, db, callback){
 	db.collection('users').findOne(query, callback);
 }
 
+export function getPollById(id, db, callback){	
+	let searchid = ObjectID.createFromHexString(id);
+	let query = {_id: searchid};	
+	db.collection('polls').findOne(query, callback);
+}
+
 export function comparePassword(inputPassword,hash,callback){
 
 	bcrypt.compare(inputPassword, hash, function(err, isMatch) {

@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {browserHistory} from 'react-router';
 import Nav from '../components/Nav.jsx';
 
 export default class AppContainer extends Component{
@@ -56,6 +57,13 @@ export default class AppContainer extends Component{
 			this.setState({isUserAuthenticated});
 		};
 		xhr.send();
+	}
+
+	componentWillMount(){
+		if(this.props.location.search){
+			let pollid = this.props.location.search.split('=')[1];
+			browserHistory.push(`/p/${pollid}`);
+		}
 	}
 
 	render(){

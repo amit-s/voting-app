@@ -1,4 +1,5 @@
 import React,{Component} from 'react';
+import {browserHistory} from 'react-router';
 import PollItem from '../components/PollItem.jsx';
 
 export default class PollItemContainer extends Component{
@@ -8,9 +9,12 @@ export default class PollItemContainer extends Component{
 	}
 
 	handleClick(e){		
-		this.props.updateUserPageView(true);				
+		//this.props.updateUserPageView(true);				
 		//console.log(e.target.parentNode.id);
-		this.props.updateSelectedPoll(e.target.parentNode.id);
+		//this.props.updateSelectedPoll(e.target.parentNode.id);
+		//console.log(e.target.parentNode.id);
+		//browserHistory.push('/p/somepollid');
+		browserHistory.push(`/p/${e.target.parentNode.id}`);
 	}
 
 
@@ -23,7 +27,7 @@ export default class PollItemContainer extends Component{
 
 		return(
 			<div style={style}>
-				{this.props.data.map((poll,i)=>(<PollItem pollData={poll} key={i} id={i} handleClick={this.handleClick} />))}
+				{this.props.data.map((poll,i)=>(<PollItem pollData={poll} key={i} id={poll._id} handleClick={this.handleClick} />))}
 			</div>
 			);
 	}
