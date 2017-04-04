@@ -18,8 +18,8 @@ module.exports = (
 		<Route path ="/addpoll" component={AddPollContainer} />
 		<Route path="/register" component={AddUserContainer} />
 		<Route path="/login" component={LoginContainer} />
-		<Route path="/polls" component={UserPageContainer} />
-		<Route path="/:username/polls" component={UserPageContainer} />
+		{/*<Route path="/polls" component={UserPageContainer} />*/}
+		<Route path="/polls/:username" component={UserPageContainer} />
 		<Route path="/logout" component={Logout} />
 	</Route>
 );

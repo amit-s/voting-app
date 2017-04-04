@@ -53,12 +53,7 @@ export default class UserPageContainer extends Component{
 	}
 
 	updateDataset(props){
-		let username;
-		if(props.location.pathname === '/polls'){
-			username = "";
-		}else{
-			username = this.props.getUsername();
-		}		
+		let username = props.params.username === 'all' ? "" : props.params.username;
 
 		queryDB(username).then((userdata)=>{
 				let data = userdata.data;
@@ -68,11 +63,11 @@ export default class UserPageContainer extends Component{
 
 	deletePollFromData(pollname){
 		let data = JSON.parse(JSON.stringify(this.state.data));
-		data = data.filter((poll)=>poll.name !== pollname);		
+		data = data.filter((poll)=>poll.name !== pollname);
 		this.setState({data});
 	}
 
-	render(){		
+	render(){
 		return(
 			<div>
 				{this.state.data.length > 0 || <h3>Create your first poll by clicking "Add Poll" above!</h3>}
