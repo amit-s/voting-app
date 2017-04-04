@@ -8,19 +8,13 @@ export default class UserPageContainer extends Component{
 	constructor(props){
 		super(props);
 		this.state = {
-			data: [],
-			//selectedPoll: 0,
-			/*displayPollView: false*/
-			
+			data: []			
 		};
-		//this.updateUserPageView = this.updateUserPageView.bind(this);
-		//this.updateSelectedPoll = this.updateSelectedPoll.bind(this);
+		
 		this.handleVote = this.handleVote.bind(this);
 		this.updateDataset = this.updateDataset.bind(this);
 		this.deletePollFromData = this.deletePollFromData.bind(this);
 	}
-
-	
 
 	handleVote(newdata){		
 		let data = this.state.data.map(function(item){
@@ -40,16 +34,14 @@ export default class UserPageContainer extends Component{
 		this.updateDataset(this.props);
 	}
 
-	componentWillReceiveProps(nextProps){
-		//this.setState({displayPollView: false});
+	componentWillReceiveProps(nextProps){		
 		this.updateDataset(nextProps);
 	}
 
 	updateDataset(props){
 		let username = props.params.username === 'all' ? "" : props.params.username;
-//console.log(username)
+
 		queryDB(username,null).then((userdata)=>{
-			//console.log(userdata);
 				let data = userdata.data;
 				this.setState({data});
 			}, (error)=>(console.log(error)));
@@ -65,9 +57,7 @@ export default class UserPageContainer extends Component{
 		return(
 			<div>
 				{this.state.data.length > 0 || <h3>Create your first poll by clicking "Add Poll" above!</h3>}
-				<PollItemContainer data={this.state.data} />
-				{/*!this.state.displayPollView && <PollItemContainer data={this.state.data} updateUserPageView={this.updateUserPageView} updateSelectedPoll={this.updateSelectedPoll} />*/}
-				{/*this.state.displayPollView && <PollViewContainer data={this.state.data[this.state.selectedPoll]} updateData={this.deletePollFromData} updateUserPageView={this.updateUserPageView} handleVote={this.handleVote} checkAuth={this.props.checkAuth} getIP={this.props.getIP} getUsername={this.props.getUsername} />*/}
+				<PollItemContainer data={this.state.data} checkAuth={this.props.checkAuth} getIP={this.props.getIP} getUsername={this.props.getUsername} />				
 			</div>
 			);
 	}
