@@ -3,7 +3,7 @@ import {Link} from 'react-router';
 import NavLink from './NavLink.jsx';
 
 const Nav = ({isUserAuthenticated,username})=>(
-	<div>
+	
 		<nav className="navbar navbar-default">
 			<div className="container-fluid">
 			
@@ -33,7 +33,7 @@ const Nav = ({isUserAuthenticated,username})=>(
 				</div>
 			</div>
 		</nav>
-	</div>
+	
 )
 
 Nav.propTypes = {
