@@ -79,10 +79,8 @@ export default class PollControlsContainer extends Component{
 
 	handleDelete(pollname){		
 		deletePoll(pollname).then(
-			(success)=>{
-				//browserHistory.push(`/${this.state.username}/polls`);
-				browserHistory.push(`/u/${this.state.username}`);
-				//this.props.updateData(pollname);
+			(success)=>{				
+				browserHistory.push(`/u/${this.state.username}`);				
 			},
 			(error)=>console.log(error)
 			);
@@ -98,8 +96,6 @@ export default class PollControlsContainer extends Component{
 		
 	}
 
-	
-
 	componentWillReceiveProps(){
 		this.setState({showAddOption: false})
 	}
@@ -110,6 +106,7 @@ export default class PollControlsContainer extends Component{
 				{!this.state.hasUserVoted && <PollVote data={this.props.data} getVote={this.handleChange} />}
 				{this.state.hasUserVoted && <h3>You voted for "{this.state.userVote}"</h3>}
 				{this.state.showAddOption && <AddPollOptionContainer addNewOption={this.props.addNewOption} data={this.props.data} />}
+				{!this.state.showAddOption && <h5>Vote for your newly added option to save it</h5>}
 				{this.props.ownPoll && <DeletePoll handleDelete={this.handleDelete} pollname={this.props.data.name} />}
 			</div>
 			);

@@ -5,7 +5,7 @@ export default class AddPollOptionContainer extends Component{
 	constructor(props){
 		super(props);
 		this.state = {
-			option : ""
+			option : ""			
 		};
 		this.handleFieldChange = this.handleFieldChange.bind(this);
 		this.handleAddOption = this.handleAddOption.bind(this);
@@ -22,8 +22,9 @@ export default class AddPollOptionContainer extends Component{
 			count: 0
 		};
 		data.options.push(newOption);		
-		this.props.addNewOption(data);
+		this.props.addNewOption(data);		
 	}
+
 
 	render(){		
 		return <AddPollOption handleChange={this.handleFieldChange} handleAddOption={this.handleAddOption} />;
