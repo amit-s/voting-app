@@ -1,4 +1,4 @@
-import {getPolls, updateVoteCount} from '../controller/api_functions_server.js';
+import {getPolls, updateVoteCount, getPollById} from '../controller/api_functions_server.js';
 import express from 'express';
 import {addPoll} from '../controller/api_functions_server';
 
@@ -12,16 +12,26 @@ Router.use(function(req,res,next){
 	next();
 });
 
-Router.route('/data')
-	.get(function(req,res){
-		getPolls(db,req.query.username).then(
-			data=>res.send({data}),
-			err=>console.log(err)
-		);
+Router.route('/data/:searchtype')
+	.get(function(req,res){		
+		if(req.params.searchtype === 'user'){
+			getPolls(db,req.query.username).then(
+				data=>res.send({data}),
+				err=>console.log(err)
+			);
+		}
+
+		if(req.params.searchtype === 'pollid'){			
+			getPollById(req.query.pollid,db,function(error,poll){
+				if(error){
+					res.json({error});
+				}
+				res.send(poll);
+			})
+		}		
 	})
 	.post(function(req,res){
-		let newdata = JSON.parse(req.body.data);
-		
+		let newdata = JSON.parse(req.body.data);		
 		updateVoteCount(db,newdata).then(success=>console.log(success),error=>console.log(error));
 		res.end();
 	});

@@ -40,8 +40,7 @@ export default class PollChart extends Component{
 
 	render(){
 		return(
-			<div>
-				<h1>{this.props.data.name}</h1>
+			<div>				
 				<div id="chart">
 					<svg></svg>
 					

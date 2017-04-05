@@ -18,9 +18,9 @@ const Nav = ({isUserAuthenticated,username})=>(
 				</div>
 				<div className="collapse navbar-collapse" id="navbar-collapse-menu">
 					<ul className="nav navbar-nav">
-						{!isUserAuthenticated && <li><NavLink to="/polls" >Polls</NavLink></li>}
-						{isUserAuthenticated && <li><NavLink to="/polls" >All Polls</NavLink></li>}
-						{isUserAuthenticated && <li><NavLink to={`/${username}/polls`} >My Polls</NavLink></li>}
+						{!isUserAuthenticated && <li><NavLink to="/u/all" >Polls</NavLink></li>}
+						{isUserAuthenticated && <li><NavLink to="/u/all" >All Polls</NavLink></li>}
+						{isUserAuthenticated && <li><NavLink to={`/u/${username}`} >My Polls</NavLink></li>}
 						{isUserAuthenticated && <li><NavLink to="/addpoll" >Add Poll</NavLink></li>}
 						
 					</ul>
