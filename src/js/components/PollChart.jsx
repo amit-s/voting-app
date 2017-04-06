@@ -34,16 +34,25 @@ export default class PollChart extends Component{
 		}
 	}
 
+	shouldComponentUpdate(newProps){
+		if(this.props.data.options.length !== newProps.data.options.length){
+			return false;
+		}
+		return true;
+	}
+
 	componentDidUpdate(){		
 		renderChart(this.props.data);
 	}
 
 	render(){
 		return(
-			<div>				
+			<div style={{display:"flex", flexWrap: "wrap", justifyContent: "space-around", alignItems:"center"}}>				
 				<div id="chart">
-					<svg></svg>
-					
+					<svg></svg>					
+				</div>
+				<div id="legend">
+					<svg></svg>					
 				</div>
 			</div>
 			);

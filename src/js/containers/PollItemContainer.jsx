@@ -16,7 +16,7 @@ export default class PollItemContainer extends Component{
 	}
 
 	handleClick(e){
-		browserHistory.push(`/p/${e.target.parentNode.id}`);
+		browserHistory.push(`/p/${e.target.parentNode.id || e.target.id}`);
 	}
 
 	hasUserVoted(poll){

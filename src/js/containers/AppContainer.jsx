@@ -2,10 +2,6 @@ import React, {Component} from 'react';
 import {browserHistory} from 'react-router';
 import Nav from '../components/Nav.jsx';
 
-
-
-
-
 export default class AppContainer extends Component{
 	constructor(props){
 		super(props);

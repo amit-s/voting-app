@@ -29,7 +29,7 @@ mongo.connect(mongoURL, function(err,db){
 	app.set('mongo', db);
 	app.set('view engine', 'pug');
 
-	app.use('/public', express.static(__dirname + '/public'));
+	app.use('/public', express.static(__dirname + '/public'));	
 	app.use(cookieParser());
 	app.use(bodyParser.urlencoded({extended: false}));
 	app.use(session({
