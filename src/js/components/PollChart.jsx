@@ -47,10 +47,12 @@ export default class PollChart extends Component{
 
 	render(){
 		return(
-			<div>				
+			<div style={{display:"flex", flexWrap: "wrap", justifyContent: "space-around", alignItems:"center"}}>				
 				<div id="chart">
-					<svg></svg>
-					
+					<svg></svg>					
+				</div>
+				<div id="legend">
+					<svg></svg>					
 				</div>
 			</div>
 			);
