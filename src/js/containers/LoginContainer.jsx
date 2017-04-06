@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Router, browserHistory} from 'react-router';
-import Login from '../components/Login.jsx'
+import Login from '../components/Login.jsx';
 
 export default class LoginContainer extends Component{
 
@@ -16,12 +16,14 @@ export default class LoginContainer extends Component{
 	}
 
 	handleLogin(e){		
+		
 		e.preventDefault();
 		let params = `username=${this.state.username}&password=${this.state.password}`;
 		let xhr = new XMLHttpRequest();
 		xhr.open('POST', '/login', true);
 		xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-		xhr.onload = ()=>{			
+		xhr.onload = ()=>{	
+		
 			if(xhr.status == 400){
 				this.setState({
 					error: JSON.parse(xhr.response).message
