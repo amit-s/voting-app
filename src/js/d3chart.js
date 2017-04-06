@@ -5,16 +5,15 @@ const height = 350;
 
 export default function renderChart(data){	
 	
-	let dataset = data.options.map(option=>Object.assign({},{name: option.name, count: option.count}));
-	
-	//let categories = data.options.map(item=>item.name);	
+	let dataset = data.options.map(option=>Object.assign({},{name: option.name, count: option.count}));	
 
 	let w = width;
 	let h = height;
 	let innerRadius = 80;
 	let outerRadius = w/2
 
-	let color = d3.scaleOrdinal(d3.schemeCategory20);	
+	let color = d3.scaleOrdinal(d3.schemeCategory10);
+	//console.log(color.range());
 	
 	let svg = d3.select("#chart")
 				.select("svg")
@@ -44,15 +43,7 @@ export default function renderChart(data){
 			.attr("d", arc)
 			.attr("fill", (d,i)=>color(i));
 
-		arcs.append("text")
-			.attr("transform", d=>`translate(${arc.centroid(d)})`)
-			.attr("text-anchor","middle")
-			.text(d=>{
-				if(d.data.count != 0){
-					
-					return d.data.name;
-				}				
-			});
+		
 
 	/* ***UPDATE*** */
 		svg.selectAll("path")
@@ -60,17 +51,7 @@ export default function renderChart(data){
 			.attr("d", arc)
 			.attr("fill", (d,i)=>color(i));
 
-		svg.selectAll("text")
-			.data(pie(dataset))
-			.transition()
-			.attr("transform", d=>`translate(${arc.centroid(d)})`)
-			.attr("text-anchor","middle")			
-			.text(d=>{
-				if(d.data.count != 0){
-					
-					return d.data.name;
-				}				
-			});
+		
 
 	/* ***REMOVE*** */
 		svg.selectAll("g.arcs")

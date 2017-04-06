@@ -34,6 +34,13 @@ export default class PollChart extends Component{
 		}
 	}
 
+	shouldComponentUpdate(newProps){
+		if(this.props.data.options.length !== newProps.data.options.length){
+			return false;
+		}
+		return true;
+	}
+
 	componentDidUpdate(){		
 		renderChart(this.props.data);
 	}
