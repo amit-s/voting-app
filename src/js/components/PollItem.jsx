@@ -12,10 +12,10 @@ const PollItem = ({pollData,handleClick,id,hasVoted})=>{
 	let voteStatus = hasVoted ? "Voted" : "Not voted";
 
 	return(
-		<div style={style} onClick={(handleClick)} id={id}>
+		<div style={style} onClick={(handleClick)} id={id} >
 			<div>{pollData.name} - {voteStatus}</div>
 			<div>Total Votes {pollData.options.reduce((total,option)=>(total + option.count),0)}</div>
-			<div>Created by {pollData.createdBy} on {date.toLocaleDateString()}</div>
+			<div>Created by {pollData.createdBy}</div>
 			<div>Created on {date.toLocaleDateString()}</div>			
 		</div>
 	);

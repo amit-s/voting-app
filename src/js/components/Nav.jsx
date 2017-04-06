@@ -3,12 +3,11 @@ import {Link} from 'react-router';
 import NavLink from './NavLink.jsx';
 
 const Nav = ({isUserAuthenticated,username})=>(
-	<div>
+	
 		<nav className="navbar navbar-default">
-			<div className="container-fluid">
-			
+			<div className="container-fluid">			
 				<div className="navbar-header">
-					<button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="navbar-collapse-menu" aria-expanded="false">
+					<button type="button" className="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-menu" aria-expanded="false">
 						<span className="sr-only">Toggle navigation</span>
 						<span className="icon-bar"></span>
 						<span className="icon-bar"></span>
@@ -16,7 +15,7 @@ const Nav = ({isUserAuthenticated,username})=>(
 					</button>
 					<a className="navbar-brand" href="/">Voting App</a>
 				</div>
-				<div className="collapse navbar-collapse" id="navbar-collapse-menu">
+				<div className="collapse navbar-collapse" id="navbar-collapse-menu" >
 					<ul className="nav navbar-nav">
 						{!isUserAuthenticated && <li><NavLink to="/u/all" >Polls</NavLink></li>}
 						{isUserAuthenticated && <li><NavLink to="/u/all" >All Polls</NavLink></li>}
@@ -33,7 +32,7 @@ const Nav = ({isUserAuthenticated,username})=>(
 				</div>
 			</div>
 		</nav>
-	</div>
+	
 )
 
 Nav.propTypes = {
