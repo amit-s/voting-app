@@ -20,7 +20,7 @@ export default class PollChart extends Component{
 		if(!empty){
 			renderChart(this.props.data);
 		}else{
-			d3.select("svg")
+			/*d3.select("svg")
 				.selectAll("*").remove();
 			d3.select("svg")
 				.attr("width",350)
@@ -30,7 +30,7 @@ export default class PollChart extends Component{
 				.append("text")				
 				.text("No Votes yet...")
 				.attr("x", 100)
-				.attr("y", 50)			
+				.attr("y", 50)	*/		
 		}
 	}
 

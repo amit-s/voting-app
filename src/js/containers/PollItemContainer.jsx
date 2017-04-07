@@ -40,8 +40,7 @@ export default class PollItemContainer extends Component{
 					hasVoted = true;
 				}
 			});
-		}
-		
+		}		
 		return hasVoted;
 	}
 
@@ -55,10 +54,11 @@ export default class PollItemContainer extends Component{
 	}
 
 
-	render(){
+	render(){		
 		let style = {
 			display: 'flex',
-			flexWrap: 'wrap'
+			flexWrap: 'wrap',
+			justifyContent: 'center'
 		};
 		
 

@@ -1,7 +1,13 @@
-* {
-  border: 1px solid red; }
+/**
+ * border: 1px solid red */
+body {
+  background-color: black; }
 
 #app {
-  padding: 5%; }
+  padding: 5%;
+  font-family: "Titillium Web", sans-serif; }
+
+.pollitem:hover {
+  background-color: rgba(0, 0, 0, 0.2); }
 
 /*# sourceMappingURL=styles.css.map */
