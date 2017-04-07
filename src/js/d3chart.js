@@ -23,8 +23,8 @@ export default function renderChart(data){
 				.attr("width", w)
 				.attr("height", h);
 
-	svgChart.select("#emptynotify")
-		.remove();
+	/*svgChart.select("#emptynotify")
+		.remove();*/
 
 	let arc = d3.arc()
 				.innerRadius(innerRadius)
