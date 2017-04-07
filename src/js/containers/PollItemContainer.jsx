@@ -5,18 +5,17 @@ import PollItem from '../components/PollItem.jsx';
 export default class PollItemContainer extends Component{
 	constructor(props){
 		super(props);
-		this.state = {
-			
+		this.state = {			
 			username: "",
 			ip: "",
 			authorizedUser: false,
 			hasVoted: false
 		};
-		this.handleClick = this.handleClick.bind(this);		
+		this.handleClick = this.handleClick.bind(this);
 	}
 
 	handleClick(e){
-		browserHistory.push(`/p/${e.target.parentNode.id || e.target.id}`);
+		browserHistory.push(`/p/${e.target.parentNode.id || e.target.parentNode.parentNode.id || e.target.id}`);
 	}
 
 	hasUserVoted(poll){
@@ -40,8 +39,7 @@ export default class PollItemContainer extends Component{
 					hasVoted = true;
 				}
 			});
-		}
-		
+		}		
 		return hasVoted;
 	}
 
@@ -49,26 +47,29 @@ export default class PollItemContainer extends Component{
 		let authorizedUser = this.props.checkAuth();
 		let username = this.props.getUsername();
 		let ip = this.props.getIP();
-		
 
 		this.setState({authorizedUser,username,ip})
 	}
 
+	getTotalVotes(pollData){
+		return pollData.options.reduce((total,option)=>(total + option.count),0);
+	}
+
+	getLeaderObj(pollData){
+		return pollData.options.sort((a,b)=>b.count-a.count)[0];
+	}
 
 	render(){
 		let style = {
 			display: 'flex',
-			flexWrap: 'wrap'
-		};
-		
+			flexWrap: 'wrap',
+			justifyContent: 'center'
+		};		
 
 		return(
 			<div style={style}>
-				{this.props.data.map((poll,i)=>(<PollItem pollData={poll} key={i} id={poll._id} hasVoted={this.hasUserVoted(poll)}  handleClick={this.handleClick} />))}
+				{this.props.data.map((poll,i)=>(<PollItem pollData={poll} key={i} id={poll._id} hasVoted={this.hasUserVoted(poll)}  handleClick={this.handleClick} totalVotes={this.getTotalVotes(poll)} leaderObj={this.getLeaderObj(poll)} />))}
 			</div>
 			);
 	}
 }
-
-
-

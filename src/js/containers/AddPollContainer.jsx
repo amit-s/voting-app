@@ -70,7 +70,7 @@ export default class AddPollContainer extends Component{
 
 	render(){
 		return(
-			<AddPoll optionCount={this.state.optionCount} updateOptionCount={this.updateOptionCount} change={this.handleChange} submit={this.handleSubmit} errors={this.state.errors} />
+				<AddPoll optionCount={this.state.optionCount} updateOptionCount={this.updateOptionCount} change={this.handleChange} submit={this.handleSubmit} errors={this.state.errors} />			
 			);
 	}
 } 

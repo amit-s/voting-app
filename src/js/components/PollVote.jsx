@@ -1,7 +1,7 @@
 import React,{PropTypes} from 'react';
 
 const PollVote = ({data,getVote})=>(
-	<div>		
+	<div style={{margin: 10}} >		
 		<select name={data.name} onChange={getVote} className="form-control">
 		<option value="select">Cast your vote...</option>
 		{data.options.map((option,i)=><option key={i} value={option.name}>{option.name}</option>)}

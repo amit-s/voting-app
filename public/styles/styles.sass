@@ -1,11 +1,21 @@
-*
-	border: 1px solid red
+$poll-item-hover-color : rgba(0,0,0,0.2)
+
+/**
+	border: 1px solid red*/
+
 
 #app
+	margin: auto
 	padding: 5%
+	font-family: 'Titillium Web', sans-serif
 
+.pollitem:hover
+	background-color: $poll-item-hover-color
 
+@media only screen and (min-width: 992px)
+	#app
+		width: 90%
 
-
-
-
+@media only screen and (min-width: 1200px)
+	#app
+		width: 80%

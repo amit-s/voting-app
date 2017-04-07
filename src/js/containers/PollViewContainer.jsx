@@ -35,21 +35,19 @@ export default class PollViewContainer extends Component{
 				this.setState({data,ownPoll});
 			},
 			error=>console.log(error)
-			);
-		
+			);		
 	}
 
-	handleVote(newdata){		
-		let params = `data=${JSON.stringify(newdata)}`;		
+	handleVote(newdata){
+		let params = `data=${JSON.stringify(newdata)}`;
 		updateDB(params);
 		this.setState({data: newdata});
 	}
 
-	render(){		
+	render(){
 		return(
-			<div>
-				<h1>{this.state.data.name}</h1>				
-				{/*<PollControlsContainer getvote={this.props.handleVote} data={this.state.data} updateData={this.props.updateData} addNewOption={this.addNewOption} checkAuth={this.props.checkAuth} getIP={this.props.getIP} getUsername={this.props.getUsername} ownPoll={this.state.ownPoll} />*/}
+			<div style={{backgroundColor: "rgba(0,0,0,0.1)", paddingTop: 15, borderRadius: 15}}>
+				<h1 className="text-center">{this.state.data.name}</h1>
 				{this.state.data.name && <PollControlsContainer data={this.state.data} getVote={this.handleVote} addNewOption={this.addNewOption} checkAuth={this.props.checkAuth} getIP={this.props.getIP} getUsername={this.props.getUsername} ownPoll={this.state.ownPoll} />}
 				{this.state.data.name && <PollChart data={this.state.data} />}
 			</div>
