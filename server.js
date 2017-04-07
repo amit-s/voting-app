@@ -14,7 +14,7 @@ let passport = require('passport');
 let LocalStrategy = require('passport-local').Strategy;
 
 let port = process.env.PORT || 3000;
-let mongoURL = process.env.MONGO_URI || 'mongodb://localhost:27017/votingapp'
+let mongoURL = process.env.MONGO_URI || 'mongodb://localhost:27017/votingapp';
 
 let app = express();
 

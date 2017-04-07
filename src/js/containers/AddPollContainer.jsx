@@ -58,7 +58,11 @@ export default class AddPollContainer extends Component{
 	}
 
 
-	handleChange(e){		
+	handleChange(e){
+		if(!e.target.value.trim().length){
+			return;
+		}
+
 		if(e.target.name === "pollName"){
 			this.setState({pollName: e.target.value});
 		}else{
