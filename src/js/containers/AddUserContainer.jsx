@@ -49,6 +49,10 @@ export default class AddUserContainer extends Component{
 	render(){		
 		let {name,username} = this.state;
 		let value = {name,username};
-		return <AddUser change={this.handleChange} submit={this.handleSubmit} errors={this.state.errors} value={value} /> ;
+		return (
+			<div style={{width: "60%", margin: "auto"}}>
+				<AddUser change={this.handleChange} submit={this.handleSubmit} errors={this.state.errors} value={value} />
+			</div>
+		);
 	}
 }

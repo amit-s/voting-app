@@ -102,11 +102,11 @@ export default class PollControlsContainer extends Component{
 
 	render(){
 		return(
-			<div>
+			<div style={{width: "60%", margin: "auto"}} >
 				{!this.state.hasUserVoted && <PollVote data={this.props.data} getVote={this.handleChange} />}
-				{this.state.hasUserVoted && <h3>You voted for "{this.state.userVote}"</h3>}
+				{this.state.hasUserVoted && <h3 className="text-center">You voted for "{this.state.userVote}"</h3>}
 				{this.state.showAddOption && <AddPollOptionContainer addNewOption={this.props.addNewOption} data={this.props.data} />}
-				{(!this.state.showAddOption && this.state.authorizedUser && !this.state.hasUserVoted) && <h5>Vote for your newly added option to save it</h5>}
+				{(!this.state.showAddOption && this.state.authorizedUser && !this.state.hasUserVoted) && <h5 className="text-center" style={{color: "red",fontSize: "1.3em"}}>Vote for your newly added option to save it</h5>}
 				{this.props.ownPoll && <DeletePoll handleDelete={this.handleDelete} pollname={this.props.data.name} />}
 			</div>
 			);

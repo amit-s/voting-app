@@ -1,6 +1,6 @@
 import React from 'react';
 
-const PollItem = ({pollData,handleClick,id,hasVoted})=>{
+const PollItem = ({pollData,handleClick,id,hasVoted,totalVotes,leaderObj})=>{
 	let date = new Date(pollData.createdTime);
 	let style = {
 		container: {
@@ -12,7 +12,7 @@ const PollItem = ({pollData,handleClick,id,hasVoted})=>{
 			borderRadius: 5,
 			margin: 5,
 			padding: 10,
-			width: 200
+			width: 220
 		},
 		heading: {
 			fontFamily: "Kanit, sans-serif"
@@ -26,24 +26,22 @@ const PollItem = ({pollData,handleClick,id,hasVoted})=>{
 			left: 5
 		}
 	};
-	//let voteStatus = hasVoted ? "Voted" : "Not voted";
-	//let voteIcon = hasVoted ? <span className='glyphicon glyphicon-ok-circle' ></span> : <span className='glyphicon glyphicon-remove-circle'></span>;
-	let voteIcon = hasVoted ? <span className='glyphicon glyphicon-ok' style={style.span} ></span> : "";
-	let totalVotes = pollData.options.reduce((total,option)=>(total + option.count),0);
-	let leaderObj = pollData.options.sort((a,b)=>b.count-a.count)[0];
+	
+	let voteIcon = hasVoted ? <span className='glyphicon glyphicon-ok' style={style.span} ></span> : "";	
 	let leaderName = totalVotes === 0 ? "No leader yet" : leaderObj.name;
-	let leaderPercentage = totalVotes === 0 ? "" : `(${(leaderObj.count/totalVotes * 100).toFixed(2)}%)`;
-	//console.log(leader);
+	let leaderPercentage = totalVotes === 0 ? "" : `(${(leaderObj.count/totalVotes * 100).toFixed(2)}%)`;	
 
 	return(
+		/*Hover effect handled in css*/
 		<div className="pollitem text-center" style={style.container} onClick={(handleClick)} id={id} >
 			{voteIcon}
-			<h4 style={style.heading} id={id}>{pollData.name}</h4>
-			<div>by {pollData.createdBy} - {date.toLocaleDateString()}</div>
+			<h4 style={style.heading} >{pollData.name}</h4>
+			<div><i>by {pollData.createdBy} - {date.toLocaleDateString()}</i></div>
 			<br />
-			<div>Total Votes {totalVotes}</div>
-			<div>Leader - {leaderName} {leaderPercentage}</div>
-			
+			<div style={{fontSize: "1.1em"}}>
+				<div>Total Votes {totalVotes}</div>
+				<div>Leader - {leaderName} {leaderPercentage}</div>
+			</div>
 		</div>
 	);
 };

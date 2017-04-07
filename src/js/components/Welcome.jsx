@@ -1,5 +1,10 @@
 import React from 'react';
 
-const Welcome = ()=>(<h1>Welcome to the Voting App</h1>);
+const Welcome = ()=>(
+		<div>
+			<h1 className="text-center">Voting App</h1>
+			<div></div>
+		</div>
+	);
 
 export default Welcome;

@@ -54,9 +54,10 @@ export default class LoginContainer extends Component{
 			var success = sessionStorage.getItem('success');
 			sessionStorage.removeItem('success');
 		}
-		return(			
-			<Login success={success} error={this.state.error} handleChange={this.handleChange} handleLogin={this.handleLogin} />
-		
+		return(
+			<div style={{width: "60%", margin: "auto"}}>
+				<Login success={success} error={this.state.error} handleChange={this.handleChange} handleLogin={this.handleLogin} />
+			</div>
 		);
 	}
 }

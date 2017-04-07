@@ -6,8 +6,9 @@ const heightChart = 350;
 export default function renderChart(data){	
 	
 	let dataset = data.options.map(option=>Object.assign({},{name: option.name, count: option.count}));
+	dataset.sort((a,b)=>b.count-a.count);
 
-	const widthLegend = 300;
+	const widthLegend = 230;
 	const heightLegend = dataset.length * 25 + 25;
 
 	let w = widthChart;
@@ -21,10 +22,7 @@ export default function renderChart(data){
 	let svgChart = d3.select("#chart")
 				.select("svg")
 				.attr("width", w)
-				.attr("height", h);
-
-	/*svgChart.select("#emptynotify")
-		.remove();*/
+				.attr("height", h);	
 
 	let arc = d3.arc()
 				.innerRadius(innerRadius)
@@ -90,7 +88,8 @@ export default function renderChart(data){
 			.append("text")
 			.text(d=>`${d.name} - ${d.count} ${d.count === 1 ? "vote" : "votes"}`)
 			.attr("x", 25)
-			.attr("y", (d,i)=>i*22 + 15);
+			.attr("y", (d,i)=>i*22 + 15)
+			.attr("font-size","1.1em");
 
 	svgLegend.select("g.legend")
 			.attr("transform", "translate(20,20)")
@@ -99,6 +98,11 @@ export default function renderChart(data){
 
 
 	/* ***Legend Update *** */
+
+	svgLegend.select("g.legend")
+			.selectAll("rect")
+			.data(dataset)			
+			.attr("fill", (d,i)=>color(i));
 	
 	svgLegend.select("g.legend")
 			.selectAll("text")
